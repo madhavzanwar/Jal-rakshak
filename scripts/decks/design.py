@@ -610,7 +610,9 @@ def s_ml(slide, spec, ctx):
         x = MX + k * (tw + gap)
         y = top + r * (th + gap)
         box(slide, x, y, tw, th, fill=m.get("fill", SKY), radius=0.12)
-        text(slide, x + 0.2, y + 0.12, tw - 0.4, 0.6, m["value"], size=28, bold=True, color=m.get("color", VIOLET))
+        vs = min(28, int((tw - 0.4) * 72 / (len(m["value"]) * 0.6)))
+        text(slide, x + 0.2, y + 0.12, tw - 0.4, 0.55, m["value"], size=vs, bold=True, color=m.get("color", VIOLET),
+             anchor="bottom")
         text(slide, x + 0.2, y + 0.72, tw - 0.4, th - 0.8, m["label"], size=12, color=INK, line_spacing=1.08)
     if spec.get("metrics_note"):
         y = top + rows * (th + gap)

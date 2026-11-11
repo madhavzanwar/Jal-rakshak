@@ -211,24 +211,33 @@ def risk_formula(tag=None, title_="A risk score an officer can audit"):
     }
 
 
-def ml(tag=None, title_="ML that reports its real accuracy"):
+def ml(tag=None, title_="ML that reports its real accuracy", with_agents=False):
     metrics, note = ml_metrics()
-    return {
+    spec = {
         "layout": "ml", "kicker": "Optional LightGBM model · honest backtest", "title": title_, "tag": tag,
         "metrics": metrics, "metrics_note": note,
         "rows": [
             {"icon": "layers", "head": "Training data", "color": "5B4DB7",
              "body": "GloFAS v4 river discharge + ERA5 rainfall reanalysis, 1991–2024, for the 12 cities."},
             {"icon": "clock", "head": "Time-split, no leakage", "color": "5B4DB7",
-             "body": "Train on earlier years, test on later years; thresholds use the training period only."},
+             "body": "Train 1991–2018, validate 2019–20, test 2021–24; label thresholds use training years only."},
             {"icon": "scale", "head": "Compared to a baseline", "color": "5B4DB7",
-             "body": "Reported next to the rule-based score, so judges can see what ML adds (or doesn't)."},
+             "body": "Same perturbed inputs for LightGBM and the rule score: perfect, noisy and persistence "
+                     "forecasts."},
             {"icon": "shield-check", "head": "Advisory, not in charge", "color": "0B1F3A",
              "body": "The deterministic score drives alerts; the model adds P(flood-day) as context."},
         ],
         "sources": "Metrics read from backend/models/backtest.json; method in docs/MODEL.md.",
         "notes": "Be upfront: labels are proxies built from reanalysis, not official flood records.",
     }
+    if with_agents:
+        spec["kicker"] = "LightGBM backtest + agentic LLM"
+        spec["rows"][2] = {"icon": "bot", "head": "Agentic LLM layer", "color": "F08A24",
+                           "body": "Qwen2.5 3B on Ollama, own ReAct tool-calling loop: Monitor, Drafter, "
+                                   "Evacuation, SitRep."}
+        spec["rows"][3] = {"icon": "shield-check", "head": "Guarded, advisory, human-approved", "color": "0B1F3A",
+                           "body": "Numbers only from tools; guards on every draft; rules fallback; officer approves."}
+    return spec
 
 
 def tech_stack(tag=None, title_="Tech stack: open source end to end"):
@@ -434,7 +443,7 @@ def slides_for(kit_id: str) -> list[dict]:
             problem(),
             who(),
             solution(agentic_first=True),
-            ml(title_="ML + agents: what the models do, and how well"),
+            ml(title_="ML + agents: what the models do, and how well", with_agents=True),
             stack_split,
             plan(),
             demo(),
