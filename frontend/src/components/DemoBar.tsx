@@ -19,7 +19,7 @@ export function DemoPill({ className = '' }: { className?: string }) {
 }
 
 /** Replay controls for demo mode: play/pause, frame slider, speed, timestamp and caption. */
-export function DemoBar() {
+export function DemoBar({ compact = false }: { compact?: boolean }) {
   const { demo } = useApi();
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(1);
@@ -38,6 +38,16 @@ export function DemoBar() {
 
   if (!demo) return null;
   const f = demo.frame;
+  if (compact) {
+    return (
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-fuchsia-200 bg-fuchsia-50 px-3 py-1.5 text-xs text-fuchsia-950" data-testid="demo-bar">
+        <span data-testid="demo-pill" className="font-semibold">
+          DEMO · synthetic replay inspired by Assam monsoon floods
+        </span>
+        <span className="font-mono">{fmtTime(f.t)} IST</span>
+      </div>
+    );
+  }
   const atEnd = demo.frameIndex >= demo.frameCount - 1;
 
   return (

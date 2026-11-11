@@ -1,0 +1,83 @@
+/** Tiny dictionary for the citizen view chrome (English + Hindi). */
+export type UiLang = 'en' | 'hi';
+
+const en = {
+  title: 'Flood risk near you',
+  subtitle: 'Check the next 72 hours for your area and what to do.',
+  placeLabel: 'Area, locality or landmark',
+  placeholder: 'e.g. Anil Nagar, Guwahati',
+  check: 'Check risk',
+  useLocation: 'Use my location',
+  locating: 'Finding your location…',
+  checking: 'Checking…',
+  try: 'Try',
+  choose: 'Which place did you mean?',
+  noResults: 'No place found. Try a nearby landmark or the city name.',
+  geoDenied: 'Location permission was denied. Type your area instead.',
+  geoUnavailable: 'Location is not available on this device.',
+  riskFor: 'Risk for',
+  score: 'Risk score',
+  level: { green: 'Low risk', yellow: 'Stay alert', orange: 'High risk — be ready', red: 'Severe risk — act now' },
+  now: 'What to do now',
+  prepare: 'Prepare',
+  avoid: 'Avoid',
+  shelter: 'Nearest safe shelter',
+  directions: 'Directions',
+  walk: 'walk',
+  free: 'places free',
+  call: 'Call',
+  showMap: 'Show on map',
+  hideMap: 'Hide map',
+  emergency: 'Emergency numbers',
+  far: (km: string, city: string) => `You are ${km} km from ${city}, the nearest monitored city. Risk shown is for its closest ward.`,
+  stale: 'Data may be out of date — showing last known values.',
+  disclaimer: 'Prototype for decision support. Not an official warning — always follow IMD, NDMA and your State Disaster Management Authority.',
+  language: 'Language',
+  demoNote: 'Demo replay — synthetic data.',
+};
+
+type Dict = typeof en;
+
+const hi: Dict = {
+  title: 'आपके पास बाढ़ का खतरा',
+  subtitle: 'अपने इलाके के अगले 72 घंटे का खतरा और क्या करें, जानें।',
+  placeLabel: 'इलाका, मोहल्ला या पहचान स्थान',
+  placeholder: 'जैसे: अनिल नगर, गुवाहाटी',
+  check: 'खतरा जाँचें',
+  useLocation: 'मेरी लोकेशन इस्तेमाल करें',
+  locating: 'आपकी लोकेशन खोजी जा रही है…',
+  checking: 'जाँच हो रही है…',
+  try: 'आज़माएँ',
+  choose: 'आपका मतलब कौन-सी जगह से है?',
+  noResults: 'जगह नहीं मिली। पास का कोई प्रसिद्ध स्थान या शहर का नाम लिखें।',
+  geoDenied: 'लोकेशन की अनुमति नहीं मिली। अपना इलाका लिखें।',
+  geoUnavailable: 'इस डिवाइस पर लोकेशन उपलब्ध नहीं है।',
+  riskFor: 'खतरा:',
+  score: 'खतरा स्कोर',
+  level: { green: 'कम खतरा', yellow: 'सतर्क रहें', orange: 'अधिक खतरा — तैयार रहें', red: 'गंभीर खतरा — अभी कदम उठाएँ' },
+  now: 'अभी क्या करें',
+  prepare: 'तैयारी करें',
+  avoid: 'इनसे बचें',
+  shelter: 'सबसे नज़दीकी सुरक्षित आश्रय',
+  directions: 'रास्ता देखें',
+  walk: 'पैदल',
+  free: 'जगह खाली',
+  call: 'कॉल करें',
+  showMap: 'नक्शे पर दिखाएँ',
+  hideMap: 'नक्शा छिपाएँ',
+  emergency: 'आपातकालीन नंबर',
+  far: (km: string, city: string) => `आप ${city} से ${km} किमी दूर हैं, जो सबसे नज़दीकी निगरानी वाला शहर है। खतरा उसके सबसे पास के वार्ड का दिखाया गया है।`,
+  stale: 'डेटा पुराना हो सकता है — अंतिम ज्ञात जानकारी दिखाई जा रही है।',
+  disclaimer: 'यह निर्णय-सहायता प्रोटोटाइप है, आधिकारिक चेतावनी नहीं। हमेशा IMD, NDMA और राज्य आपदा प्रबंधन प्राधिकरण के निर्देश मानें।',
+  language: 'भाषा',
+  demoNote: 'डेमो रीप्ले — कृत्रिम डेटा।',
+};
+
+export const DICT: Record<UiLang, Dict> = { en, hi };
+
+export const DEFAULT_EMERGENCY = [
+  { label: 'Emergency (Police/Fire/Ambulance)', labelHi: 'आपातकाल (पुलिस/फायर/एम्बुलेंस)', number: '112' },
+  { label: 'NDMA disaster helpline', labelHi: 'NDMA आपदा हेल्पलाइन', number: '1078' },
+  { label: 'NDRF control room', labelHi: 'NDRF नियंत्रण कक्ष', number: '011-24363260' },
+  { label: 'Ambulance', labelHi: 'एम्बुलेंस', number: '108' },
+];
