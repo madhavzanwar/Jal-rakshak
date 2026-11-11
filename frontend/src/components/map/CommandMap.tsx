@@ -5,13 +5,7 @@ import L from 'leaflet';
 import type { CityRisk, CitySummary, EvacuationPlan, Facility } from '../../api/schema';
 import { LEVEL_COLORS } from '../../lib/levels';
 import { cityIcon, facilityIcon, FACILITY_STYLE, pinIcon } from './icons';
-
-export const INDIA_BOUNDS: L.LatLngBoundsExpression = [
-  [7.5, 68.5],
-  [33.5, 97.5],
-];
-export const OSM_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-export const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+import { INDIA_BOUNDS, OSM_ATTRIBUTION, OSM_URL } from './constants';
 
 function FlyTo({ detail, selectedId, focus }: { detail?: CityRisk | undefined; selectedId: string | null; focus?: [number, number] | null }) {
   const map = useMap();

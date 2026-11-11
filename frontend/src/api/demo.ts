@@ -27,6 +27,7 @@ import {
 } from './schema';
 import { ADVICE } from '../lib/advice';
 import { haversineKm } from '../lib/geo';
+import { fmtTime } from '../lib/format';
 import { CLIENT_GUARD_NAMES, runGuards } from '../lib/guards';
 
 export interface KeyValueStore {
@@ -329,7 +330,7 @@ export class DemoClient implements ApiClient {
     const result: RunAgentsResult = { run: chosen.run };
     if (jumpedToFrame !== undefined) {
       result.jumpedToFrame = jumpedToFrame;
-      result.note = `Replay jumped to frame ${jumpedToFrame + 1} (${this.scenario.frames[jumpedToFrame]?.t ?? ''}) where this run was recorded.`;
+      result.note = `Demo replay jumped to frame ${jumpedToFrame + 1} (${fmtTime(this.scenario.frames[jumpedToFrame]?.t)} IST), when this agent run was recorded.`;
     }
     return this.delay(result);
   }
