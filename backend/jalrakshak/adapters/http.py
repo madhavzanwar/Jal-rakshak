@@ -64,9 +64,9 @@ async def get_json(
                     return resp.json()
             except (httpx.TransportError, httpx.HTTPStatusError, ValueError) as exc:
                 last = exc
-                if isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code < 500:
-                    if exc.response.status_code != 429:
-                        break
+                code = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else 0
+                if 400 <= code < 500 and code != 429:
+                    break  # client errors are not retried
             if attempt < retries:
                 await asyncio.sleep(0.5 * (attempt + 1))
     finally:

@@ -22,20 +22,28 @@ _WardRow = tuple[str, float, float, int, int, float, float]
 # id: (name, state, lat, lon, population, wards)
 _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
     "mumbai": (
-        "Mumbai", "Maharashtra", 19.0760, 72.8777, 12_442_000,
+        "Mumbai",
+        "Maharashtra",
+        19.0760,
+        72.8777,
+        12_442_000,
         [
             ("Kurla", 19.0726, 72.8845, 1500, 410_000, 6.0, 0.85),
             ("Sion", 19.0390, 72.8619, 1100, 230_000, 5.0, 0.80),
             ("Dharavi", 19.0380, 72.8538, 1000, 600_000, 4.0, 0.95),
             ("Kalina", 19.0760, 72.8640, 1000, 150_000, 7.0, 0.70),
-            ("Hindmata, Dadar", 19.0178, 72.8478, 900, 180_000, 5.0, 0.75),
+            ("Hindmata", 19.0178, 72.8478, 900, 180_000, 5.0, 0.75),
             ("Andheri East", 19.1136, 72.8697, 1800, 520_000, 11.0, 0.55),
             ("Chembur", 19.0522, 72.9005, 1600, 330_000, 12.0, 0.45),
             ("Malad West", 19.1874, 72.8484, 1700, 480_000, 9.0, 0.50),
         ],
     ),
     "chennai": (
-        "Chennai", "Tamil Nadu", 13.0827, 80.2707, 7_088_000,
+        "Chennai",
+        "Tamil Nadu",
+        13.0827,
+        80.2707,
+        7_088_000,
         [
             ("Velachery", 12.9815, 80.2180, 1600, 260_000, 5.0, 0.90),
             ("Pallikaranai", 12.9349, 80.2137, 1500, 120_000, 4.0, 0.90),
@@ -48,7 +56,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "guwahati": (
-        "Guwahati", "Assam", 26.1445, 91.7362, 1_116_000,
+        "Guwahati",
+        "Assam",
+        26.1445,
+        91.7362,
+        1_116_000,
         [
             ("Pandu", 26.1720, 91.6800, 1200, 85_000, 50.0, 0.80),
             ("Maligaon", 26.1580, 91.6950, 1200, 95_000, 52.0, 0.60),
@@ -61,7 +73,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "patna": (
-        "Patna", "Bihar", 25.5941, 85.1376, 2_046_000,
+        "Patna",
+        "Bihar",
+        25.5941,
+        85.1376,
+        2_046_000,
         [
             ("Digha", 25.6450, 85.0900, 1300, 160_000, 49.0, 0.80),
             ("Danapur", 25.6300, 85.0500, 1600, 180_000, 50.0, 0.70),
@@ -74,7 +90,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "kochi": (
-        "Kochi", "Kerala", 9.9312, 76.2673, 2_120_000,
+        "Kochi",
+        "Kerala",
+        9.9312,
+        76.2673,
+        2_120_000,
         [
             ("Aluva", 10.1076, 76.3516, 1400, 110_000, 9.0, 0.85),
             ("Eloor", 10.0750, 76.3000, 1000, 40_000, 4.0, 0.80),
@@ -87,7 +107,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "srinagar": (
-        "Srinagar", "Jammu and Kashmir", 34.0837, 74.7973, 1_273_000,
+        "Srinagar",
+        "Jammu and Kashmir",
+        34.0837,
+        74.7973,
+        1_273_000,
         [
             ("Rajbagh", 34.0705, 74.8235, 900, 45_000, 1584.0, 0.90),
             ("Jawahar Nagar", 34.0680, 74.8115, 800, 40_000, 1585.0, 0.85),
@@ -100,7 +124,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "kolkata": (
-        "Kolkata", "West Bengal", 22.5726, 88.3639, 4_497_000,
+        "Kolkata",
+        "West Bengal",
+        22.5726,
+        88.3639,
+        4_497_000,
         [
             ("Tiljala", 22.5370, 88.3920, 1000, 190_000, 5.0, 0.85),
             ("Kasba", 22.5180, 88.3870, 1100, 170_000, 5.0, 0.75),
@@ -113,7 +141,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "bhubaneswar": (
-        "Bhubaneswar", "Odisha", 20.2961, 85.8245, 1_163_000,
+        "Bhubaneswar",
+        "Odisha",
+        20.2961,
+        85.8245,
+        1_163_000,
         [
             ("Palasuni", 20.3000, 85.8700, 1100, 60_000, 21.0, 0.85),
             ("Rasulgarh", 20.2900, 85.8600, 1000, 80_000, 24.0, 0.70),
@@ -126,7 +158,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "surat": (
-        "Surat", "Gujarat", 21.1702, 72.8311, 6_081_000,
+        "Surat",
+        "Gujarat",
+        21.1702,
+        72.8311,
+        6_081_000,
         [
             ("Rander", 21.2190, 72.7920, 1300, 230_000, 9.0, 0.80),
             ("Adajan", 21.1950, 72.7960, 1400, 300_000, 10.0, 0.75),
@@ -139,7 +175,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "hyderabad": (
-        "Hyderabad", "Telangana", 17.3850, 78.4867, 10_270_000,
+        "Hyderabad",
+        "Telangana",
+        17.3850,
+        78.4867,
+        10_270_000,
         [
             ("Chaderghat", 17.3800, 78.4900, 800, 90_000, 497.0, 0.85),
             ("Malakpet", 17.3730, 78.5000, 1100, 210_000, 500.0, 0.80),
@@ -152,7 +192,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "pune": (
-        "Pune", "Maharashtra", 18.5204, 73.8567, 7_276_000,
+        "Pune",
+        "Maharashtra",
+        18.5204,
+        73.8567,
+        7_276_000,
         [
             ("Sinhagad Road", 18.4830, 73.8220, 1500, 280_000, 560.0, 0.75),
             ("Kasba Peth", 18.5200, 73.8600, 700, 80_000, 552.0, 0.70),
@@ -165,7 +209,11 @@ _CITIES: dict[str, tuple[str, str, float, float, int, list[_WardRow]]] = {
         ],
     ),
     "dibrugarh": (
-        "Dibrugarh", "Assam", 27.4728, 94.9120, 154_000,
+        "Dibrugarh",
+        "Assam",
+        27.4728,
+        94.9120,
+        154_000,
         [
             ("Mancotta", 27.4700, 94.9300, 1000, 16_000, 104.0, 0.85),
             ("Boiragimoth", 27.4750, 94.9180, 800, 18_000, 105.0, 0.80),

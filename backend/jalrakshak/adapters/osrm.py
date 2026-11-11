@@ -37,7 +37,10 @@ def straight_line(origin: tuple[float, float], dest: tuple[float, float]) -> Rou
         method="straight_line",
         distance_m=round(d, 1),
         duration_s=round(d / WALK_MPS, 1),
-        geometry=[(round(origin[0], 5), round(origin[1], 5)), (round(dest[0], 5), round(dest[1], 5))],
+        geometry=[
+            (round(origin[0], 5), round(origin[1], 5)),
+            (round(dest[0], 5), round(dest[1], 5)),
+        ],
     )
 
 

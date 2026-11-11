@@ -25,6 +25,7 @@ vulnerability.
 
 from __future__ import annotations
 
+import itertools
 from collections.abc import Sequence
 from dataclasses import dataclass
 
@@ -49,7 +50,7 @@ def piecewise(x: float, points: Sequence[tuple[float, float]]) -> float:
     """Piecewise-linear interpolation through ``points`` (sorted by x), flat outside."""
     if x <= points[0][0]:
         return points[0][1]
-    for (x0, y0), (x1, y1) in zip(points, points[1:], strict=False):
+    for (x0, y0), (x1, y1) in itertools.pairwise(points):
         if x <= x1:
             return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
     return points[-1][1]
@@ -146,8 +147,10 @@ def explain(
         drivers.append(f"wet ground after {inputs.antecedent_7d_mm:.0f} mm in the past 7 days")
     if not drivers:
         drivers.append("little or no rain forecast and rivers below warning levels")
-    text = " and ".join(drivers) if len(drivers) <= 2 else ", ".join(drivers[:-1]) + (
-        f" and {drivers[-1]}"
+    text = (
+        " and ".join(drivers)
+        if len(drivers) <= 2
+        else ", ".join(drivers[:-1]) + (f" and {drivers[-1]}")
     )
     sentence = (
         f"{level.capitalize()} risk ({score:.0f}/100): {text}, in a "

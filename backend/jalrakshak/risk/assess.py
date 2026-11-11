@@ -156,7 +156,9 @@ def _overall(wards: list[WardRisk]) -> RiskScore:
     return max(wards, key=lambda w: w.risk.score).risk.model_copy(deep=True)
 
 
-def _city_rain(ward_rain: Sequence[RainSeries], times: Sequence[str], now: datetime) -> list[RainPoint]:
+def _city_rain(
+    ward_rain: Sequence[RainSeries], times: Sequence[str], now: datetime
+) -> list[RainPoint]:
     """Hourly ward-mean precipitation for the next 72 h."""
     if not ward_rain or not times:
         return []

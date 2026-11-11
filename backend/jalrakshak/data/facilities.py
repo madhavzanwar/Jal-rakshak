@@ -55,7 +55,10 @@ def _type_plan(n: int) -> list[FacilityType]:
     n_hosp = max(2, n // 4)
     n_camp = max(2, n // 4)
     n_shel = n - n_hosp - n_camp
-    return ["shelter"] * n_shel + ["hospital"] * n_hosp + ["relief_camp"] * n_camp
+    plan: list[FacilityType] = ["shelter"] * n_shel
+    plan += ["hospital"] * n_hosp
+    plan += ["relief_camp"] * n_camp
+    return plan
 
 
 def generate_city_facilities(city: City) -> list[Facility]:

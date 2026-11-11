@@ -42,11 +42,10 @@ jalrakshak = ["data/*.json"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["jalrakshak/ml"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
-ignore = ["RUF001", "RUF002", "RUF003"]
+ignore = ["RUF001", "RUF002", "RUF003", "E501"]  # formatter owns line width; long strings allowed
 
 [tool.mypy]
 python_version = "3.13"
@@ -56,12 +55,6 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 no_implicit_optional = true
 ignore_missing_imports = true
-exclude = ["jalrakshak/ml/"]
-
-[[tool.mypy.overrides]]
-module = "jalrakshak.ml.*"
-ignore_errors = true
-follow_imports = "skip"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

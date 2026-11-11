@@ -81,7 +81,9 @@ class RiskService:
         ]
         if city.gauges:
             sources.append(
-                _source("Open-Meteo Flood API (GloFAS river discharge)", openmeteo.FLOOD_URL, dis_res)
+                _source(
+                    "Open-Meteo Flood API (GloFAS river discharge)", openmeteo.FLOOD_URL, dis_res
+                )
             )
         if rain_res is not None:
             rain = [RainSeries(r["time"], r["mm"]) for r in rain_res.value]

@@ -7,6 +7,7 @@ the observed 168 h before ``now_idx``.
 
 from __future__ import annotations
 
+import itertools
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -90,7 +91,7 @@ def discharge_at(dates: Sequence[str], m3s: Sequence[float], when: datetime) -> 
     pts = [(parse_ts(d + "T12:00:00Z"), float(v)) for d, v in zip(dates, m3s, strict=False)]
     if when <= pts[0][0]:
         return pts[0][1]
-    for (t0, v0), (t1, v1) in zip(pts, pts[1:], strict=False):
+    for (t0, v0), (t1, v1) in itertools.pairwise(pts):
         if when <= t1:
             frac = (when - t0).total_seconds() / (t1 - t0).total_seconds()
             return v0 + (v1 - v0) * frac
@@ -110,8 +111,10 @@ def gauge_reading(
         current = series[-1].m3s if series else 0.0
     horizon_dates = {(today + timedelta(days=k)).isoformat() for k in range(3)}
     window = [p for p in series if p.date in horizon_dates] or series[-1:]
-    peak = max(window, key=lambda p: p.m3s) if window else DischargePoint(
-        date=today.isoformat(), m3s=0.0
+    peak = (
+        max(window, key=lambda p: p.m3s)
+        if window
+        else DischargePoint(date=today.isoformat(), m3s=0.0)
     )
     return GaugeReading(
         gauge=gauge,

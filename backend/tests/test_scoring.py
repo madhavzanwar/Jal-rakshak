@@ -36,7 +36,12 @@ def gauge(peak: float) -> sc.GaugeRef:
 
 
 def inp(
-    r24: float = 0, r72: float = 0, i: float = 0, a: float = 0, v: float = 0.5, peak: float | None = None
+    r24: float = 0,
+    r72: float = 0,
+    i: float = 0,
+    a: float = 0,
+    v: float = 0.5,
+    peak: float | None = None,
 ) -> sc.RiskInputs:
     return sc.RiskInputs(r24, r72, i, a, v, gauge(peak) if peak is not None else None)
 
@@ -46,8 +51,16 @@ def inp(
 
 @pytest.mark.parametrize(
     ("score", "level"),
-    [(0, "green"), (29.99, "green"), (30, "yellow"), (54.99, "yellow"), (55, "orange"),
-     (74.99, "orange"), (75, "red"), (100, "red")],
+    [
+        (0, "green"),
+        (29.99, "green"),
+        (30, "yellow"),
+        (54.99, "yellow"),
+        (55, "orange"),
+        (74.99, "orange"),
+        (75, "red"),
+        (100, "red"),
+    ],
 )
 def test_level_cutoffs(score: float, level: str) -> None:
     assert level_for(score) == level
@@ -60,8 +73,15 @@ def test_level_rank_and_max() -> None:
 
 @pytest.mark.parametrize(
     ("mm", "cat"),
-    [(0, "no rain"), (0.1, "very light"), (2.5, "light"), (15.6, "moderate"), (64.5, "heavy"),
-     (115.6, "very heavy"), (204.5, "extremely heavy")],
+    [
+        (0, "no rain"),
+        (0.1, "very light"),
+        (2.5, "light"),
+        (15.6, "moderate"),
+        (64.5, "heavy"),
+        (115.6, "very heavy"),
+        (204.5, "extremely heavy"),
+    ],
 )
 def test_imd_categories(mm: float, cat: str) -> None:
     assert imd_category(mm) == cat
@@ -202,8 +222,12 @@ def test_ml_probability_passthrough_and_features() -> None:
     assert sc.score_ward(i, 0.42).ml_probability == 0.42
     f = sc.ml_features(i)
     assert set(f) == {
-        "rain_24h_mm", "rain_72h_mm", "max_intensity_mmph", "antecedent_7d_mm",
-        "discharge_ratio", "vulnerability",
+        "rain_24h_mm",
+        "rain_72h_mm",
+        "max_intensity_mmph",
+        "antecedent_7d_mm",
+        "discharge_ratio",
+        "vulnerability",
     }
     assert f["discharge_ratio"] == pytest.approx(0.5)
     assert sc.ml_features(inp())["discharge_ratio"] == 0.0
@@ -255,7 +279,9 @@ def test_gauge_reading_peak_over_three_days() -> None:
 # ------------------------------------------------------------------ assess
 
 
-def _flat_city_inputs(rain_mm: float, peak: float, now: datetime) -> tuple[list[RainSeries], list[DischargeSeries]]:
+def _flat_city_inputs(
+    rain_mm: float, peak: float, now: datetime
+) -> tuple[list[RainSeries], list[DischargeSeries]]:
     city = get_city("guwahati")
     assert city is not None
     t0 = now - timedelta(hours=168)

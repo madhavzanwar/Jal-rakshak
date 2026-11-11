@@ -114,9 +114,7 @@ async def fetch_discharge(points: list[Point], cache: FileCache | None = None) -
     async def fetch() -> Any:
         return await _discharge_request(points)
 
-    return await (cache or FileCache()).get_or_fetch(
-        _discharge_key(points), DISCHARGE_TTL_S, fetch
-    )
+    return await (cache or FileCache()).get_or_fetch(_discharge_key(points), DISCHARGE_TTL_S, fetch)
 
 
 async def prefetch(rain_groups: list[list[Point]], gauge_groups: list[list[Point]]) -> None:
@@ -127,7 +125,14 @@ async def prefetch(rain_groups: list[list[Point]], gauge_groups: list[list[Point
     """
     cache = FileCache()
     now = time.time()
-    plan: list[tuple[Callable[[list[Point]], str], float, Callable[[list[Point]], Awaitable[Rows]], list[list[Point]]]] = [
+    plan: list[
+        tuple[
+            Callable[[list[Point]], str],
+            float,
+            Callable[[list[Point]], Awaitable[Rows]],
+            list[list[Point]],
+        ]
+    ] = [
         (_rain_key, RAIN_TTL_S, _rain_request, rain_groups),
         (_discharge_key, DISCHARGE_TTL_S, _discharge_request, gauge_groups),
     ]
