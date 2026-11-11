@@ -136,7 +136,7 @@ def build_svg() -> str:
 
     rect(690, 690, 320, 266, fill=VIOLET_L, stroke=VIOLET, sw=2, dash="8 6")
     text(712, 734, "LightGBM (optional)", size=21, weight=700, fill=VIOLET)
-    lines(712, 770, ["P(flood-day) per city", "honest time-split backtest", "trained on GloFAS +", "ERA5 reanalysis (1991–2024)"], size=16)
+    lines(712, 770, ["P(flood-day) per city", "honest time-split backtest", "trained on GloFAS + ERA5", "reanalysis; test 2021–24"], size=16)
     arrow(850, 690, 850, 650, color=VIOLET)
     arrow(1010, 300, 1054, 300)
 

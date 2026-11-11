@@ -144,17 +144,19 @@ def agents(tag=None, title_="Agentic AI on a local open LLM, with guardrails"):
     }
 
 
+# Rendered by the backend's vetted templates (backend/jalrakshak/agents/templates.py, render_sms) for a
+# red Guwahati alert with the Brahmaputra above danger level (demo scenario). Lengths: 135/129/127/128/129.
 SAMPLES = [
-    {"lang": "English", "text": "JalRakshak RED flood alert, Anil Nagar (Guwahati): Brahmaputra above danger "
-                                "level. Move to the nearest shelter now. Help: 112"},
-    {"lang": "हिन्दी", "text": "जलरक्षक लाल बाढ़ चेतावनी, अनिल नगर: ब्रह्मपुत्र खतरे के निशान से ऊपर। "
-                               "अभी नज़दीकी आश्रय में जाएँ। मदद: 112"},
-    {"lang": "मराठी", "text": "जलरक्षक लाल पूर इशारा, अनिल नगर: ब्रह्मपुत्रा धोक्याच्या पातळीवर. "
-                             "त्वरित जवळच्या निवाऱ्यात जा. मदत: 112"},
-    {"lang": "தமிழ்", "text": "ஜலரக்ஷக் சிவப்பு வெள்ள எச்சரிக்கை, அனில் நகர்: பிரம்மபுத்திரா அபாய "
-                             "அளவைத் தாண்டியது. உடனே பாதுகாப்பான இடத்திற்குச் செல்லவும். உதவி: 112"},
-    {"lang": "বাংলা", "text": "জলরক্ষক লাল বন্যা সতর্কতা, অনিল নগর: ব্রহ্মপুত্র বিপদসীমার উপরে। "
-                            "এখনই নিকটতম আশ্রয়ে যান। সাহায্য: 112"},
+    {"lang": "English", "text": "JalRakshak RED ALERT Guwahati (Pandu, Maligaon): Brahmaputra above danger level. "
+                                "Move to higher ground or a shelter now. Emergency: 112"},
+    {"lang": "हिन्दी", "text": "बाढ़ लाल चेतावनी: गुवाहाटी (Pandu, Maligaon)। ब्रह्मपुत्र खतरे के निशान से ऊपर। "
+                               "तुरंत ऊँचे स्थान या शिविर में जाएँ। आपात नंबर 112"},
+    {"lang": "मराठी", "text": "पूर लाल इशारा: गुवाहाटी. ब्रह्मपुत्रा नदी धोक्याच्या पातळीवर. त्वरित उंच ठिकाणी "
+                             "किंवा निवारा केंद्रात जा. आपत्कालीन क्रमांक 112"},
+    {"lang": "தமிழ்", "text": "வெள்ள சிவப்பு எச்சரிக்கை: குவாஹாட்டி (Pandu). பிரம்மபுத்திரா அபாய அளவை "
+                             "தாண்டியது. உடனே மேடான இடத்துக்கு செல்லவும். அவசர உதவி 112"},
+    {"lang": "বাংলা", "text": "বন্যা লাল সতর্কতা: গুয়াহাটি (Pandu, Maligaon)। ব্রহ্মপুত্র বিপদসীমার উপরে। "
+                            "এখনই উঁচু জায়গা বা ত্রাণ শিবিরে যান। জরুরি নম্বর 112"},
 ]
 
 
@@ -162,8 +164,8 @@ def alerts(tag=None, title_="Five languages, one approval click"):
     return {"layout": "alerts", "kicker": "Multilingual alerts + human approval gate", "title": title_, "tag": tag,
             "samples": SAMPLES, "image": "admin",
             "caption": "Admin view: review, edit, approve. Dispatch is simulated and logged.",
-            "sources": "Sample SMS from the synthetic Guwahati demo scenario. Indic alerts use vetted templates; "
-                       "guards check script, length, numbers and 112.",
+            "sources": "SMS rendered by our vetted templates for the synthetic Guwahati scenario (127–135 chars). "
+                       "Guards check script, length, numbers and 112.",
             "notes": "Show the language tabs. Point at the guard results and the SMS counter."}
 
 
@@ -218,9 +220,9 @@ def ml(tag=None, title_="ML that reports its real accuracy", with_agents=False):
         "metrics": metrics, "metrics_note": note,
         "rows": [
             {"icon": "layers", "head": "Training data", "color": "5B4DB7",
-             "body": "GloFAS v4 river discharge + ERA5 rainfall reanalysis, 1991–2024, for the 12 cities."},
+             "body": "GloFAS v4 river discharge (1997–2024) + hourly ERA5 rainfall reanalysis, 12 cities."},
             {"icon": "clock", "head": "Time-split, no leakage", "color": "5B4DB7",
-             "body": "Train 1991–2018, validate 2019–20, test 2021–24; label thresholds use training years only."},
+             "body": "Train 1997–2018, validate 2019–20, test 2021–24; label thresholds use training years only."},
             {"icon": "scale", "head": "Compared to a baseline", "color": "5B4DB7",
              "body": "Same perturbed inputs for LightGBM and the rule score: perfect, noisy and persistence "
                      "forecasts."},
