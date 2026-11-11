@@ -25,6 +25,13 @@ dev = [
   "ruff>=0.5",
   "mypy>=1.10",
 ]
+ml = [
+  # optional LightGBM flood-day model (jalrakshak.ml); runtime needs only lightgbm
+  "lightgbm>=4.3",
+  "scikit-learn>=1.4",
+  "pandas>=2.1",
+  "matplotlib>=3.8",
+]
 
 [tool.setuptools.packages.find]
 include = ["jalrakshak*"]
