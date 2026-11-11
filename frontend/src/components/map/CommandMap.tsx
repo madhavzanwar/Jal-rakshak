@@ -63,7 +63,7 @@ export default function CommandMap({ cities, selectedId, detail, facilities, sel
       <MapContainer
         bounds={INDIA_BOUNDS}
         className="jr-dark-tiles h-full w-full"
-        zoomSnap={0.5}
+        zoomSnap={1}
         zoomControl={false}
         minZoom={4}
         maxZoom={17}
@@ -165,7 +165,7 @@ function MapLegend({ withFacilities }: { withFacilities: boolean }) {
         ))}
       </div>
       {withFacilities && (
-        <div className="mt-1.5 flex gap-3 border-t border-white/10 pt-1.5">
+        <div className="mt-1.5 hidden gap-3 border-t border-white/10 pt-1.5 sm:flex">
           {(Object.keys(FACILITY_STYLE) as (keyof typeof FACILITY_STYLE)[]).map((t) => (
             <span key={t} className="flex items-center gap-1">
               <span className="inline-block h-2.5 w-2.5 rounded-[3px]" style={{ background: FACILITY_STYLE[t].color }} />

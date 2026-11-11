@@ -10,9 +10,9 @@ export function DemoPill({ className = '' }: { className?: string }) {
   return (
     <span
       data-testid="demo-pill"
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-fuchsia-400/40 bg-fuchsia-500/15 px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-fuchsia-200 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border sm:whitespace-nowrap border-fuchsia-400/40 bg-fuchsia-500/15 px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-fuchsia-200 ${className}`}
     >
-      <FlaskConical className="h-3.5 w-3.5" aria-hidden />
+      <FlaskConical className="h-3.5 w-3.5 shrink-0" aria-hidden />
       DEMO · synthetic replay inspired by Assam monsoon floods
     </span>
   );
@@ -78,7 +78,7 @@ export function DemoBar({ compact = false }: { compact?: boolean }) {
             ))}
           </select>
         </div>
-        <div className="flex min-w-[180px] flex-1 items-center gap-3">
+        <div className="order-last flex min-w-[180px] flex-1 basis-full items-center gap-3 sm:order-none sm:basis-auto">
           <label htmlFor="demo-frame" className="sr-only">Replay frame</label>
           <input
             id="demo-frame"
@@ -95,7 +95,9 @@ export function DemoBar({ compact = false }: { compact?: boolean }) {
             aria-valuetext={`Frame ${demo.frameIndex + 1} of ${demo.frameCount}, ${fmtTime(f.t)} IST`}
           />
           <span className="whitespace-nowrap font-mono text-xs tabular-nums text-slate-300">
-            <span className="text-slate-500">T+{String(demo.frameIndex * 3).padStart(2, '0')}h</span> · {fmtTime(f.t)} IST
+            <span className="hidden text-slate-500 sm:inline">T+{String(demo.frameIndex * 3).padStart(2, '0')}h</span>
+            <span className="hidden sm:inline"> · </span>
+            {fmtTime(f.t)} IST
           </span>
         </div>
         <p className="min-w-0 flex-[2] basis-[320px] truncate text-xs text-slate-300" title={f.caption} data-testid="demo-caption">
@@ -104,7 +106,7 @@ export function DemoBar({ compact = false }: { compact?: boolean }) {
           </span>
           {f.caption}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center gap-2">
           <DemoPill />
           <button
             type="button"
