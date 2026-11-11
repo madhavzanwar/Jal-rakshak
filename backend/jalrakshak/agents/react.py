@@ -176,9 +176,7 @@ async def react(
         if not resp.tool_calls:
             result.final = resp.content.strip()
             if not result.final:
-                fb = await rules.chat(messages, tools)
-                result.final = fb.content.strip()
-                result.used_fallback = True
+                result.final = await _rules_finish(agent, messages, ctx, rec, result)
             return result
         messages.append(
             {"role": "assistant", "content": resp.content, "tool_calls": resp.tool_calls}
@@ -219,10 +217,49 @@ async def react(
     rec.add(
         agent, "guard", f"Reached {max_steps} steps without a final answer; using rules policy."
     )
-    fb = await rules.chat(messages, tools)
-    result.final = fb.content.strip()
-    result.used_fallback = True
+    result.final = await _rules_finish(agent, messages, ctx, rec, result)
     return result
+
+
+async def _rules_finish(
+    agent: AgentName,
+    messages: list[Message],
+    ctx: ToolContext,
+    rec: StepRecorder,
+    result: ReactResult,
+) -> str:
+    """Let the deterministic policy complete the task (running any tools it still needs)."""
+    result.used_fallback = True
+    rules = RulesProvider()
+    for _ in range(8):
+        resp = await rules.chat(messages, None)
+        if not resp.tool_calls:
+            return resp.content.strip()
+        messages.append({"role": "assistant", "content": "", "tool_calls": resp.tool_calls})
+        for call in resp.tool_calls:
+            rec.add(
+                agent,
+                "tool_call",
+                f"Calling {call.name} (rules)",
+                tool=call.name,
+                input=call.arguments,
+            )
+            t0 = time.perf_counter()
+            try:
+                out: Any = await call_tool(call.name, call.arguments, ctx)
+                result.results.setdefault(call.name, []).append(out)
+            except ToolArgError as exc:
+                out = {"error": str(exc)}
+            rec.add(
+                agent,
+                "tool_result",
+                _summarise(call.name, out),
+                tool=call.name,
+                output=out,
+                duration_ms=(time.perf_counter() - t0) * 1000,
+            )
+            messages.append(_tool_message(call, out))
+    return ""
 
 
 def _summarise(name: str, out: Any) -> str:

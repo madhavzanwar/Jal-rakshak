@@ -28,6 +28,8 @@ from typing import Any
 
 import httpx
 
+from jalrakshak.adapters.http import ssl_verify
+
 Message = dict[str, Any]
 ToolSpec = dict[str, Any]
 
@@ -200,9 +202,7 @@ class OpenAICompatibleProvider(LLMProvider):
         if tools:
             payload["tools"] = [{"type": "function", "function": t} for t in tools]
         try:
-            async with httpx.AsyncClient(
-                timeout=60.0, verify=os.environ.get("SSL_CERT_FILE") or True
-            ) as c:
+            async with httpx.AsyncClient(timeout=60.0, verify=ssl_verify()) as c:
                 r = await c.post(
                     f"{self.base_url}/chat/completions",
                     json=payload,
@@ -282,9 +282,7 @@ class GeminiProvider(LLMProvider):
             f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent"
         )
         try:
-            async with httpx.AsyncClient(
-                timeout=60.0, verify=os.environ.get("SSL_CERT_FILE") or True
-            ) as c:
+            async with httpx.AsyncClient(timeout=60.0, verify=ssl_verify()) as c:
                 r = await c.post(
                     url, params={"key": self.api_key}, json=self._payload(messages, tools)
                 )

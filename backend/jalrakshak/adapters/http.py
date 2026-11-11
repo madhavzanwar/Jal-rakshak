@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import asyncio
 import os
+import ssl
+from functools import lru_cache
 from typing import Any
 
 import httpx
@@ -26,11 +28,20 @@ class FetchError(RuntimeError):
     """Raised when an upstream source cannot be fetched and no cached value exists."""
 
 
+@lru_cache(maxsize=1)
+def ssl_verify() -> ssl.SSLContext | bool:
+    """TLS verification honouring SSL_CERT_FILE (e.g. a corporate/sandbox proxy CA bundle)."""
+    cafile = os.environ.get("SSL_CERT_FILE")
+    if cafile and os.path.exists(cafile):
+        return ssl.create_default_context(cafile=cafile)
+    return True
+
+
 def make_client(timeout: float = 20.0) -> httpx.AsyncClient:
     """httpx client honouring HTTPS_PROXY and the sandbox CA bundle (SSL_CERT_FILE)."""
     return httpx.AsyncClient(
         timeout=httpx.Timeout(timeout, connect=min(timeout, CONNECT_TIMEOUT_S)),
-        verify=os.environ.get("SSL_CERT_FILE") or True,
+        verify=ssl_verify(),
         headers={"User-Agent": USER_AGENT},
         follow_redirects=True,
     )
