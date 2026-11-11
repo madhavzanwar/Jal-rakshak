@@ -16,10 +16,10 @@ export default function RainfallChart({ points, height = 150 }: { points: RainPo
   return (
     <div style={{ height }} role="img" aria-label={`Hourly rainfall forecast, ${total.toFixed(0)} mm total over 72 hours`}>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={points} margin={{ top: 8, right: 8, bottom: 0, left: -18 }} barCategoryGap={1}>
+        <BarChart data={points} margin={{ top: 8, right: 8, bottom: 0, left: -12 }} barCategoryGap={1}>
           <CartesianGrid stroke={GRID} vertical={false} />
           <XAxis dataKey="t" tickFormatter={fmtHour} interval={11} {...AXIS} tickLine={false} />
-          <YAxis {...AXIS} tickLine={false} width={44} unit="" />
+          <YAxis {...AXIS} tickLine={false} width={44} tickFormatter={(v: number) => (v === 0 ? '0' : v < 1 ? v.toFixed(1) : String(Math.round(v)))} allowDecimals />
           <Tooltip {...TOOLTIP_STYLE} cursor={{ fill: 'rgba(148,163,184,0.08)' }} labelFormatter={(l) => `${fmtTime(String(l))} IST`} formatter={(v) => [`${Number(v).toFixed(1)} mm`, 'Rain']} />
           <Bar dataKey="mm" isAnimationActive={false} radius={[2, 2, 0, 0]} shape={(props: unknown) => {
             const p = props as { x: number; y: number; width: number; height: number; payload: RainPoint };

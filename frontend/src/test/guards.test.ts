@@ -16,7 +16,7 @@ describe('guard port', () => {
     v[0] = { ...v[0]!, sms: `Call 112. ${'x'.repeat(160)}` };
     const g = guard(v, 'sms_length');
     expect(g.passed).toBe(false);
-    expect(g.detail).toMatch(/en: \d+\/160/);
+    expect(g.detail).toMatch(/en: SMS \d+ > 160 chars/);
   });
 
   it('rejects a Unicode SMS over 134 characters', () => {
@@ -30,7 +30,7 @@ describe('guard port', () => {
     v[2] = { ...v[2]!, sms: 'पूर इशारा: उंच ठिकाणी जा.' };
     const g = guard(v, 'contains_112');
     expect(g.passed).toBe(false);
-    expect(g.detail).toMatch(/mr: SMS missing 112/);
+    expect(g.detail).toMatch(/mr sms: missing 112/);
   });
 
   it('does not accept 1120 as 112', () => {
@@ -42,10 +42,18 @@ describe('guard port', () => {
   it('rejects a Tamil version written in Latin script', () => {
     const v = good();
     v[3] = { ...v[3]!, sms: 'Vellam echcharikkai. Call 112', whatsapp: 'Vellam. 112' };
-    expect(guard(v, 'script_check').passed).toBe(false);
+    expect(guard(v, 'script').passed).toBe(false);
+  });
+
+  it('rejects links and mixed Indic scripts', () => {
+    const v = good();
+    v[0] = { ...v[0]!, whatsapp: `${v[0]!.whatsapp} www.example.com` };
+    expect(guard(v, 'no_urls').passed).toBe(false);
+    v[1] = { ...v[1]!, sms: `${v[1]!.sms} বন্যা` };
+    expect(guard(v, 'script').detail).toMatch(/foreign scripts bengali/);
   });
 
   it('flags missing languages', () => {
-    expect(guard(good().slice(0, 3), 'all_languages_present').detail).toBe('missing: ta, bn');
+    expect(guard(good().slice(0, 3), 'all_languages').detail).toBe('missing languages ta, bn');
   });
 });

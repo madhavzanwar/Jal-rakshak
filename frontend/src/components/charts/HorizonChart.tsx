@@ -8,6 +8,8 @@ import { AXIS, GRID, TOOLTIP_STYLE } from './theme';
 export default function HorizonChart({ points, height = 170 }: { points: HorizonPoint[]; height?: number }) {
   const data = points.map((p) => ({ t: p.t, score: p.score }));
   const peak = points.reduce<HorizonPoint | null>((m, p) => (!m || p.score > m.score ? p : m), null);
+  const peakIdx = peak ? points.indexOf(peak) : -1;
+  const peakLeft = peakIdx >= 0 && peakIdx < points.length / 2;
   const max = Math.max(1, ...points.map((p) => p.score));
   const min = Math.min(...points.map((p) => p.score), max - 1);
   return (
@@ -32,7 +34,7 @@ export default function HorizonChart({ points, height = 170 }: { points: Horizon
               return [`${n.toFixed(1)} (${levelForScore(n)})`, 'Risk score'];
             }}
           />
-          {peak && <ReferenceLine x={peak.t} stroke="#e2e8f0" strokeDasharray="3 3" strokeOpacity={0.5} label={{ value: 'peak', position: 'insideTopRight', fill: '#cbd5e1', fontSize: 10 }} />}
+          {peak && <ReferenceLine x={peak.t} stroke="#e2e8f0" strokeDasharray="3 3" strokeOpacity={0.5} label={{ value: 'peak', position: peakLeft ? 'insideTopLeft' : 'insideTopRight', fill: '#cbd5e1', fontSize: 10, dy: 4 }} />}
           <Area type="monotone" dataKey="score" stroke="url(#hz-stroke)" strokeWidth={2} fill="url(#hz-fill)" fillOpacity={0.22} isAnimationActive={false} activeDot={{ r: 4, stroke: '#0b1220', strokeWidth: 2 }} />
         </AreaChart>
       </ResponsiveContainer>
