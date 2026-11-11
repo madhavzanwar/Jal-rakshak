@@ -1,0 +1,297 @@
+{
+  "generated_at": "2026-11-11T18:35:31Z",
+  "method": "GloFAS v4 reanalysis daily river_discharge 1995-2024 via Open-Meteo Flood API; warning=P90, danger=P98, extreme=P99.7; cell = max mean discharge in a 0.05 deg candidate grid; cells with P98 < 50.0 m3/s dropped",
+  "gauges": {
+    "chennai": [
+      {
+        "id": "chennai-adyar",
+        "river": "Adyar",
+        "lat": 13.01,
+        "lon": 80.24,
+        "warning_m3s": 22.6,
+        "danger_m3s": 92.0,
+        "extreme_m3s": 268.6
+      }
+    ],
+    "guwahati": [
+      {
+        "id": "guwahati-brahmaputra",
+        "river": "Brahmaputra",
+        "lat": 26.19,
+        "lon": 91.64,
+        "warning_m3s": 32960.0,
+        "danger_m3s": 45548.2,
+        "extreme_m3s": 56749.3
+      }
+    ],
+    "patna": [
+      {
+        "id": "patna-ganga",
+        "river": "Ganga",
+        "lat": 25.63,
+        "lon": 85.1,
+        "warning_m3s": 27226.0,
+        "danger_m3s": 39806.1,
+        "extreme_m3s": 46093.1
+      }
+    ],
+    "kochi": [
+      {
+        "id": "kochi-periyar",
+        "river": "Periyar",
+        "lat": 10.11,
+        "lon": 76.3,
+        "warning_m3s": 511.9,
+        "danger_m3s": 748.0,
+        "extreme_m3s": 1083.6
+      }
+    ],
+    "srinagar": [
+      {
+        "id": "srinagar-jhelum",
+        "river": "Jhelum",
+        "lat": 34.12,
+        "lon": 74.7,
+        "warning_m3s": 318.9,
+        "danger_m3s": 464.0,
+        "extreme_m3s": 639.7
+      }
+    ],
+    "kolkata": [
+      {
+        "id": "kolkata-hooghly",
+        "river": "Hooghly",
+        "lat": 22.57,
+        "lon": 88.29,
+        "warning_m3s": 1379.4,
+        "danger_m3s": 2389.5,
+        "extreme_m3s": 4004.1
+      }
+    ],
+    "bhubaneswar": [
+      {
+        "id": "bhubaneswar-mahanadi",
+        "river": "Mahanadi",
+        "lat": 20.43,
+        "lon": 85.98,
+        "warning_m3s": 6949.2,
+        "danger_m3s": 13519.7,
+        "extreme_m3s": 23136.8
+      }
+    ],
+    "surat": [
+      {
+        "id": "surat-tapi",
+        "river": "Tapi",
+        "lat": 21.15,
+        "lon": 72.77,
+        "warning_m3s": 1639.6,
+        "danger_m3s": 3709.9,
+        "extreme_m3s": 8227.5
+      }
+    ],
+    "hyderabad": [
+      {
+        "id": "hyderabad-musi",
+        "river": "Musi",
+        "lat": 17.37,
+        "lon": 78.53,
+        "warning_m3s": 48.4,
+        "danger_m3s": 112.0,
+        "extreme_m3s": 189.1
+      }
+    ],
+    "pune": [
+      {
+        "id": "pune-mula",
+        "river": "Mula-Mutha",
+        "lat": 18.53,
+        "lon": 73.92,
+        "warning_m3s": 166.3,
+        "danger_m3s": 648.3,
+        "extreme_m3s": 1256.8
+      }
+    ],
+    "dibrugarh": [
+      {
+        "id": "dibrugarh-brahmaputra",
+        "river": "Brahmaputra",
+        "lat": 27.5,
+        "lon": 94.82,
+        "warning_m3s": 16709.9,
+        "danger_m3s": 24265.1,
+        "extreme_m3s": 30876.7
+      }
+    ]
+  },
+  "diagnostics": {
+    "mumbai": {
+      "river": "Mithi",
+      "lat": 19.07,
+      "lon": 72.83,
+      "mean_2023_m3s": 7.0,
+      "meaningful": false,
+      "n_days": 10227,
+      "mean_m3s": 6.8,
+      "p80_m3s": 9.3,
+      "warning_m3s": 16.4,
+      "danger_m3s": 35.4,
+      "extreme_m3s": 59.5,
+      "max_m3s": 155.7
+    },
+    "chennai": {
+      "river": "Adyar",
+      "lat": 13.01,
+      "lon": 80.24,
+      "mean_2023_m3s": 14.9,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 11.3,
+      "p80_m3s": 10.7,
+      "warning_m3s": 22.6,
+      "danger_m3s": 92.0,
+      "extreme_m3s": 268.6,
+      "max_m3s": 802.5
+    },
+    "guwahati": {
+      "river": "Brahmaputra",
+      "lat": 26.19,
+      "lon": 91.64,
+      "mean_2023_m3s": 13091.9,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 14531.9,
+      "p80_m3s": 25762.2,
+      "warning_m3s": 32960.0,
+      "danger_m3s": 45548.2,
+      "extreme_m3s": 56749.3,
+      "max_m3s": 68076.0
+    },
+    "patna": {
+      "river": "Ganga",
+      "lat": 25.63,
+      "lon": 85.1,
+      "mean_2023_m3s": 7241.8,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 8635.2,
+      "p80_m3s": 17257.4,
+      "warning_m3s": 27226.0,
+      "danger_m3s": 39806.1,
+      "extreme_m3s": 46093.1,
+      "max_m3s": 55846.1
+    },
+    "kochi": {
+      "river": "Periyar",
+      "lat": 10.11,
+      "lon": 76.3,
+      "mean_2023_m3s": 236.0,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 234.8,
+      "p80_m3s": 388.1,
+      "warning_m3s": 511.9,
+      "danger_m3s": 748.0,
+      "extreme_m3s": 1083.6,
+      "max_m3s": 1789.6
+    },
+    "srinagar": {
+      "river": "Jhelum",
+      "lat": 34.12,
+      "lon": 74.7,
+      "mean_2023_m3s": 232.2,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 186.2,
+      "p80_m3s": 254.9,
+      "warning_m3s": 318.9,
+      "danger_m3s": 464.0,
+      "extreme_m3s": 639.7,
+      "max_m3s": 876.0
+    },
+    "kolkata": {
+      "river": "Hooghly",
+      "lat": 22.57,
+      "lon": 88.29,
+      "mean_2023_m3s": 331.6,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 462.1,
+      "p80_m3s": 894.4,
+      "warning_m3s": 1379.4,
+      "danger_m3s": 2389.5,
+      "extreme_m3s": 4004.1,
+      "max_m3s": 7497.9
+    },
+    "bhubaneswar": {
+      "river": "Mahanadi",
+      "lat": 20.43,
+      "lon": 85.98,
+      "mean_2023_m3s": 2067.6,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 2178.6,
+      "p80_m3s": 3220.1,
+      "warning_m3s": 6949.2,
+      "danger_m3s": 13519.7,
+      "extreme_m3s": 23136.8,
+      "max_m3s": 34672.7
+    },
+    "surat": {
+      "river": "Tapi",
+      "lat": 21.15,
+      "lon": 72.77,
+      "mean_2023_m3s": 570.8,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 539.1,
+      "p80_m3s": 585.1,
+      "warning_m3s": 1639.6,
+      "danger_m3s": 3709.9,
+      "extreme_m3s": 8227.5,
+      "max_m3s": 16556.7
+    },
+    "hyderabad": {
+      "river": "Musi",
+      "lat": 17.37,
+      "lon": 78.53,
+      "mean_2023_m3s": 27.1,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 21.0,
+      "p80_m3s": 26.3,
+      "warning_m3s": 48.4,
+      "danger_m3s": 112.0,
+      "extreme_m3s": 189.1,
+      "max_m3s": 715.1
+    },
+    "pune": {
+      "river": "Mula-Mutha",
+      "lat": 18.53,
+      "lon": 73.92,
+      "mean_2023_m3s": 66.0,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 65.1,
+      "p80_m3s": 61.4,
+      "warning_m3s": 166.3,
+      "danger_m3s": 648.3,
+      "extreme_m3s": 1256.8,
+      "max_m3s": 3212.7
+    },
+    "dibrugarh": {
+      "river": "Brahmaputra",
+      "lat": 27.5,
+      "lon": 94.82,
+      "mean_2023_m3s": 6926.8,
+      "meaningful": true,
+      "n_days": 10227,
+      "mean_m3s": 7340.4,
+      "p80_m3s": 12472.8,
+      "warning_m3s": 16709.9,
+      "danger_m3s": 24265.1,
+      "extreme_m3s": 30876.7,
+      "max_m3s": 38546.8
+    }
+  }
+}
