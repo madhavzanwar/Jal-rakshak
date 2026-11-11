@@ -17,3 +17,4 @@ submission/**/_render/
 *.wav
 !submission/**/*.wav
 .DS_Store
+*.egg-info/
