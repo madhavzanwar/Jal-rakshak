@@ -1,0 +1,66 @@
+{
+  "model": "LightGBM binary (gbdt), monotone-increasing in rain/antecedent/discharge",
+  "lightgbm_version": "4.7.0",
+  "feature_order": [
+    "rain_24h_mm",
+    "rain_72h_mm",
+    "max_intensity_mmph",
+    "antecedent_7d_mm",
+    "discharge_ratio",
+    "vulnerability",
+    "month_sin",
+    "month_cos"
+  ],
+  "threshold": 0.3825,
+  "threshold_rule": "max F1 on validation 2019-2020 (perfect-forecast features)",
+  "num_trees": 266,
+  "trained_at": "2026-11-11T18:52:14Z",
+  "training_range": "1991-01-07..2018-12-31",
+  "validation_range": "2019-01-01..2020-12-31",
+  "test_range": "2021-01-01..2024-12-28",
+  "label": "flood-day = GloFAS daily discharge at the city gauge cell > P98 of its 1997-2018 climatology OR local-day rain >= 115.6 mm (IMD very heavy); target = any flood-day in days d+1..d+3 (proxy, not observed flood events)",
+  "data_sources": {
+    "discharge": "https://flood-api.open-meteo.com/v1/flood (GloFAS v4 reanalysis, daily)",
+    "rainfall": "https://archive-api.open-meteo.com/v1/archive (ERA5/ERA5-Land reanalysis, hourly)"
+  },
+  "training_vulnerability": 0.5,
+  "metrics_test": {
+    "perfect": {
+      "lightgbm": {
+        "roc_auc": 0.9988,
+        "pr_auc": 0.9789,
+        "brier": 0.0052
+      },
+      "rule_score": {
+        "roc_auc": 0.9938,
+        "pr_auc": 0.909,
+        "brier": 0.0413
+      }
+    },
+    "noisy": {
+      "lightgbm": {
+        "roc_auc": 0.9901,
+        "pr_auc": 0.8587,
+        "brier": 0.0163
+      },
+      "rule_score": {
+        "roc_auc": 0.9877,
+        "pr_auc": 0.7865,
+        "brier": 0.0455
+      }
+    },
+    "persistence": {
+      "lightgbm": {
+        "roc_auc": 0.9441,
+        "pr_auc": 0.6082,
+        "brier": 0.0281
+      },
+      "rule_score": {
+        "roc_auc": 0.9467,
+        "pr_auc": 0.5613,
+        "brier": 0.0506
+      }
+    }
+  },
+  "caveats": "proxy label; perfect-forecast training; see docs/MODEL.md"
+}

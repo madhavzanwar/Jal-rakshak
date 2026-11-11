@@ -1,0 +1,1060 @@
+{
+  "trained_at": "2026-11-11T18:52:14Z",
+  "label": "flood-day = GloFAS daily discharge at the city gauge cell > P98 of its 1997-2018 climatology OR local-day rain >= 115.6 mm (IMD very heavy); target = any flood-day in days d+1..d+3 (proxy, not observed flood events)",
+  "split": {
+    "train": "1991-01-07..2018-12-31",
+    "validation": "2019-01-01..2020-12-31",
+    "test": "2021-01-01..2024-12-28"
+  },
+  "rows": {
+    "train": 98617,
+    "validation": 8772,
+    "test": 17496
+  },
+  "thresholds": {
+    "lightgbm_val_f1": 0.3825,
+    "rule_score_fixed": 55.0,
+    "rule_score_val_f1": 56.0
+  },
+  "scenarios_note": "perfect = realised next-72h rain/discharge (upper bound); noisy = log-normal multiplicative error (rain sigma 0.6, median -16%; discharge sigma 0.15); persistence = previous 72h used as forecast (no-skill lower bound). Same perturbed inputs feed both models.",
+  "validation_perfect": {
+    "lightgbm": {
+      "n": 8772,
+      "positives": 383,
+      "base_rate": 0.0437,
+      "roc_auc": 0.9992,
+      "pr_auc": 0.9856,
+      "brier": 0.0042,
+      "at_0.5": {
+        "threshold": 0.5,
+        "precision": 0.9882,
+        "recall": 0.8747,
+        "f1": 0.928,
+        "alert_rate": 0.0386
+      },
+      "at_val_threshold": {
+        "threshold": 0.3825,
+        "precision": 0.959,
+        "recall": 0.9164,
+        "f1": 0.9372,
+        "alert_rate": 0.0417
+      }
+    },
+    "rule_score": {
+      "n": 8772,
+      "positives": 383,
+      "base_rate": 0.0437,
+      "roc_auc": 0.994,
+      "pr_auc": 0.9238,
+      "brier": 0.0455,
+      "at_score_55": {
+        "threshold": 0.55,
+        "precision": 0.2913,
+        "recall": 1.0,
+        "f1": 0.4511,
+        "alert_rate": 0.1499
+      },
+      "at_val_threshold": {
+        "threshold": 0.56,
+        "precision": 0.927,
+        "recall": 0.8956,
+        "f1": 0.911,
+        "alert_rate": 0.0422
+      }
+    }
+  },
+  "test": {
+    "perfect": {
+      "lightgbm": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9988,
+        "pr_auc": 0.9789,
+        "brier": 0.0052,
+        "at_0.5": {
+          "threshold": 0.5,
+          "precision": 0.9709,
+          "recall": 0.8696,
+          "f1": 0.9175,
+          "alert_rate": 0.0393
+        },
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.951,
+          "recall": 0.8853,
+          "f1": 0.9169,
+          "alert_rate": 0.0408
+        }
+      },
+      "rule_score": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9938,
+        "pr_auc": 0.909,
+        "brier": 0.0413,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3368,
+          "recall": 1.0,
+          "f1": 0.5039,
+          "alert_rate": 0.1301
+        },
+        "at_val_threshold": {
+          "threshold": 0.56,
+          "precision": 0.9136,
+          "recall": 0.8683,
+          "f1": 0.8904,
+          "alert_rate": 0.0417
+        }
+      }
+    },
+    "noisy": {
+      "lightgbm": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9901,
+        "pr_auc": 0.8587,
+        "brier": 0.0163,
+        "at_0.5": {
+          "threshold": 0.5,
+          "precision": 0.7572,
+          "recall": 0.8214,
+          "f1": 0.788,
+          "alert_rate": 0.0476
+        },
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.7441,
+          "recall": 0.8266,
+          "f1": 0.7832,
+          "alert_rate": 0.0487
+        }
+      },
+      "rule_score": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9877,
+        "pr_auc": 0.7865,
+        "brier": 0.0455,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3168,
+          "recall": 0.9922,
+          "f1": 0.4803,
+          "alert_rate": 0.1373
+        },
+        "at_val_threshold": {
+          "threshold": 0.56,
+          "precision": 0.7274,
+          "recall": 0.8279,
+          "f1": 0.7744,
+          "alert_rate": 0.0499
+        }
+      }
+    },
+    "persistence": {
+      "lightgbm": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9441,
+        "pr_auc": 0.6082,
+        "brier": 0.0281,
+        "at_0.5": {
+          "threshold": 0.5,
+          "precision": 0.6701,
+          "recall": 0.601,
+          "f1": 0.6337,
+          "alert_rate": 0.0393
+        },
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.6578,
+          "recall": 0.6115,
+          "f1": 0.6338,
+          "alert_rate": 0.0408
+        }
+      },
+      "rule_score": {
+        "n": 17496,
+        "positives": 767,
+        "base_rate": 0.0438,
+        "roc_auc": 0.9467,
+        "pr_auc": 0.5613,
+        "brier": 0.0506,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2904,
+          "recall": 0.867,
+          "f1": 0.4351,
+          "alert_rate": 0.1309
+        },
+        "at_val_threshold": {
+          "threshold": 0.56,
+          "precision": 0.6354,
+          "recall": 0.618,
+          "f1": 0.6266,
+          "alert_rate": 0.0426
+        }
+      }
+    }
+  },
+  "test_per_city_perfect": {
+    "mumbai": {
+      "gauge": "none (not in gauges.json)",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 6,
+        "base_rate": 0.0041,
+        "roc_auc": 0.9991,
+        "pr_auc": 0.7996,
+        "brier": 0.0018,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.5455,
+          "recall": 1.0,
+          "f1": 0.7059,
+          "alert_rate": 0.0075
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 6,
+        "base_rate": 0.0041,
+        "roc_auc": 0.9976,
+        "pr_auc": 0.4843,
+        "brier": 0.0225,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.375,
+          "recall": 1.0,
+          "f1": 0.5455,
+          "alert_rate": 0.011
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 6,
+        "base_rate": 0.0041,
+        "roc_auc": 0.5139,
+        "pr_auc": 0.0062,
+        "brier": 0.0092,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "alert_rate": 0.0075
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 6,
+        "base_rate": 0.0041,
+        "roc_auc": 0.5947,
+        "pr_auc": 0.0067,
+        "brier": 0.0279,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "alert_rate": 0.0123
+        }
+      }
+    },
+    "chennai": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0005,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "alert_rate": 0.0528
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.999,
+        "pr_auc": 0.9904,
+        "brier": 0.0516,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2646,
+          "recall": 1.0,
+          "f1": 0.4185,
+          "alert_rate": 0.1996
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.9047,
+        "pr_auc": 0.6117,
+        "brier": 0.0464,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.5325,
+          "recall": 0.5325,
+          "f1": 0.5325,
+          "alert_rate": 0.0528
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.9082,
+        "pr_auc": 0.4472,
+        "brier": 0.071,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2109,
+          "recall": 0.8052,
+          "f1": 0.3342,
+          "alert_rate": 0.2016
+        }
+      }
+    },
+    "guwahati": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 27,
+        "base_rate": 0.0185,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0015,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.9,
+          "recall": 1.0,
+          "f1": 0.9474,
+          "alert_rate": 0.0206
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 27,
+        "base_rate": 0.0185,
+        "roc_auc": 0.9994,
+        "pr_auc": 0.9748,
+        "brier": 0.0414,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2177,
+          "recall": 1.0,
+          "f1": 0.3576,
+          "alert_rate": 0.085
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 27,
+        "base_rate": 0.0185,
+        "roc_auc": 0.9158,
+        "pr_auc": 0.4635,
+        "brier": 0.0202,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.4,
+          "recall": 0.4444,
+          "f1": 0.4211,
+          "alert_rate": 0.0206
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 27,
+        "base_rate": 0.0185,
+        "roc_auc": 0.9453,
+        "pr_auc": 0.3846,
+        "brier": 0.0481,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.1562,
+          "recall": 0.7407,
+          "f1": 0.2581,
+          "alert_rate": 0.0878
+        }
+      }
+    },
+    "patna": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0016,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.8824,
+          "recall": 1.0,
+          "f1": 0.9375,
+          "alert_rate": 0.0233
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.04,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.1807,
+          "recall": 1.0,
+          "f1": 0.3061,
+          "alert_rate": 0.1139
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.9923,
+        "pr_auc": 0.7674,
+        "brier": 0.0101,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.697,
+          "recall": 0.7667,
+          "f1": 0.7302,
+          "alert_rate": 0.0226
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.987,
+        "pr_auc": 0.598,
+        "brier": 0.043,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.1807,
+          "recall": 1.0,
+          "f1": 0.3061,
+          "alert_rate": 0.1139
+        }
+      }
+    },
+    "kochi": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 104,
+        "base_rate": 0.0713,
+        "roc_auc": 0.9996,
+        "pr_auc": 0.9953,
+        "brier": 0.0055,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.9897,
+          "recall": 0.9231,
+          "f1": 0.9552,
+          "alert_rate": 0.0665
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 104,
+        "base_rate": 0.0713,
+        "roc_auc": 0.9933,
+        "pr_auc": 0.9312,
+        "brier": 0.0524,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.4127,
+          "recall": 1.0,
+          "f1": 0.5843,
+          "alert_rate": 0.1728
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 104,
+        "base_rate": 0.0713,
+        "roc_auc": 0.9624,
+        "pr_auc": 0.7833,
+        "brier": 0.0325,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.7526,
+          "recall": 0.7019,
+          "f1": 0.7264,
+          "alert_rate": 0.0665
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 104,
+        "base_rate": 0.0713,
+        "roc_auc": 0.96,
+        "pr_auc": 0.7085,
+        "brier": 0.0628,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3532,
+          "recall": 0.8558,
+          "f1": 0.5,
+          "alert_rate": 0.1728
+        }
+      }
+    },
+    "srinagar": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 1.0,
+        "pr_auc": 0.9992,
+        "brier": 0.0029,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 1.0,
+          "recall": 0.9221,
+          "f1": 0.9595,
+          "alert_rate": 0.0487
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.998,
+        "pr_auc": 0.9626,
+        "brier": 0.0282,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.5203,
+          "recall": 1.0,
+          "f1": 0.6844,
+          "alert_rate": 0.1015
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.9455,
+        "pr_auc": 0.7253,
+        "brier": 0.0237,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.7887,
+          "recall": 0.7273,
+          "f1": 0.7568,
+          "alert_rate": 0.0487
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 77,
+        "base_rate": 0.0528,
+        "roc_auc": 0.9405,
+        "pr_auc": 0.6743,
+        "brier": 0.038,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.4595,
+          "recall": 0.8831,
+          "f1": 0.6044,
+          "alert_rate": 0.1015
+        }
+      }
+    },
+    "kolkata": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 20,
+        "base_rate": 0.0137,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0042,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.6897,
+          "recall": 1.0,
+          "f1": 0.8163,
+          "alert_rate": 0.0199
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 20,
+        "base_rate": 0.0137,
+        "roc_auc": 0.999,
+        "pr_auc": 0.8833,
+        "brier": 0.0346,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.16,
+          "recall": 1.0,
+          "f1": 0.2759,
+          "alert_rate": 0.0857
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 20,
+        "base_rate": 0.0137,
+        "roc_auc": 0.9857,
+        "pr_auc": 0.7955,
+        "brier": 0.0082,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.5862,
+          "recall": 0.85,
+          "f1": 0.6939,
+          "alert_rate": 0.0199
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 20,
+        "base_rate": 0.0137,
+        "roc_auc": 0.9808,
+        "pr_auc": 0.7066,
+        "brier": 0.0368,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.144,
+          "recall": 0.9,
+          "f1": 0.2483,
+          "alert_rate": 0.0857
+        }
+      }
+    },
+    "bhubaneswar": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 44,
+        "base_rate": 0.0302,
+        "roc_auc": 1.0,
+        "pr_auc": 0.9995,
+        "brier": 0.0012,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.9565,
+          "recall": 1.0,
+          "f1": 0.9778,
+          "alert_rate": 0.0316
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 44,
+        "base_rate": 0.0302,
+        "roc_auc": 0.999,
+        "pr_auc": 0.9824,
+        "brier": 0.0355,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2716,
+          "recall": 1.0,
+          "f1": 0.4272,
+          "alert_rate": 0.1111
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 44,
+        "base_rate": 0.0302,
+        "roc_auc": 0.9635,
+        "pr_auc": 0.6307,
+        "brier": 0.0173,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.6957,
+          "recall": 0.7273,
+          "f1": 0.7111,
+          "alert_rate": 0.0316
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 44,
+        "base_rate": 0.0302,
+        "roc_auc": 0.966,
+        "pr_auc": 0.6012,
+        "brier": 0.0421,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.2317,
+          "recall": 0.8636,
+          "f1": 0.3654,
+          "alert_rate": 0.1125
+        }
+      }
+    },
+    "surat": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 96,
+        "base_rate": 0.0658,
+        "roc_auc": 0.9995,
+        "pr_auc": 0.9936,
+        "brier": 0.0078,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.9762,
+          "recall": 0.8542,
+          "f1": 0.9111,
+          "alert_rate": 0.0576
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 96,
+        "base_rate": 0.0658,
+        "roc_auc": 0.9907,
+        "pr_auc": 0.9023,
+        "brier": 0.0473,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.375,
+          "recall": 1.0,
+          "f1": 0.5455,
+          "alert_rate": 0.1756
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 96,
+        "base_rate": 0.0658,
+        "roc_auc": 0.9772,
+        "pr_auc": 0.8354,
+        "brier": 0.029,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.7976,
+          "recall": 0.6979,
+          "f1": 0.7444,
+          "alert_rate": 0.0576
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 96,
+        "base_rate": 0.0658,
+        "roc_auc": 0.9729,
+        "pr_auc": 0.702,
+        "brier": 0.0535,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3527,
+          "recall": 0.9479,
+          "f1": 0.5141,
+          "alert_rate": 0.177
+        }
+      }
+    },
+    "hyderabad": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 182,
+        "base_rate": 0.1248,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0279,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 1.0,
+          "recall": 0.7198,
+          "f1": 0.8371,
+          "alert_rate": 0.0898
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 182,
+        "base_rate": 0.1248,
+        "roc_auc": 0.9802,
+        "pr_auc": 0.8591,
+        "brier": 0.0522,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.507,
+          "recall": 1.0,
+          "f1": 0.6728,
+          "alert_rate": 0.2462
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 182,
+        "base_rate": 0.1248,
+        "roc_auc": 0.9636,
+        "pr_auc": 0.7651,
+        "brier": 0.0629,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.8168,
+          "recall": 0.5879,
+          "f1": 0.6837,
+          "alert_rate": 0.0898
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 182,
+        "base_rate": 0.1248,
+        "roc_auc": 0.9395,
+        "pr_auc": 0.6774,
+        "brier": 0.071,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.454,
+          "recall": 0.8956,
+          "f1": 0.6026,
+          "alert_rate": 0.2462
+        }
+      }
+    },
+    "pune": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 74,
+        "base_rate": 0.0508,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0039,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 1.0,
+          "recall": 0.8784,
+          "f1": 0.9353,
+          "alert_rate": 0.0446
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 74,
+        "base_rate": 0.0508,
+        "roc_auc": 0.9921,
+        "pr_auc": 0.9011,
+        "brier": 0.0389,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3348,
+          "recall": 1.0,
+          "f1": 0.5017,
+          "alert_rate": 0.1516
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 74,
+        "base_rate": 0.0508,
+        "roc_auc": 0.9615,
+        "pr_auc": 0.5295,
+        "brier": 0.0465,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.5231,
+          "recall": 0.4595,
+          "f1": 0.4892,
+          "alert_rate": 0.0446
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 74,
+        "base_rate": 0.0508,
+        "roc_auc": 0.9508,
+        "pr_auc": 0.428,
+        "brier": 0.0513,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.3032,
+          "recall": 0.9054,
+          "f1": 0.4542,
+          "alert_rate": 0.1516
+        }
+      }
+    },
+    "dibrugarh": {
+      "gauge": "gauges.json",
+      "lightgbm": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.9997,
+        "pr_auc": 0.9892,
+        "brier": 0.0033,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.7692,
+          "recall": 1.0,
+          "f1": 0.8696,
+          "alert_rate": 0.0267
+        }
+      },
+      "rule_score": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.998,
+        "pr_auc": 0.9655,
+        "brier": 0.0516,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.1911,
+          "recall": 1.0,
+          "f1": 0.3209,
+          "alert_rate": 0.1077
+        }
+      },
+      "lightgbm_persistence": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.8954,
+        "pr_auc": 0.1843,
+        "brier": 0.0312,
+        "at_val_threshold": {
+          "threshold": 0.3825,
+          "precision": 0.1795,
+          "recall": 0.2333,
+          "f1": 0.2029,
+          "alert_rate": 0.0267
+        }
+      },
+      "rule_score_persistence": {
+        "n": 1458,
+        "positives": 30,
+        "base_rate": 0.0206,
+        "roc_auc": 0.9147,
+        "pr_auc": 0.1664,
+        "brier": 0.062,
+        "at_score_55": {
+          "threshold": 0.55,
+          "precision": 0.121,
+          "recall": 0.6333,
+          "f1": 0.2032,
+          "alert_rate": 0.1077
+        }
+      }
+    }
+  },
+  "feature_importance_gain": {
+    "rain_24h_mm": 31700.0,
+    "rain_72h_mm": 7233.1,
+    "max_intensity_mmph": 1940.1,
+    "antecedent_7d_mm": 3689.8,
+    "discharge_ratio": 265214.1,
+    "vulnerability": 0.0,
+    "month_sin": 1996.4,
+    "month_cos": 1496.4
+  },
+  "gauges": {
+    "mumbai": {
+      "source": "none (not in gauges.json)",
+      "lat": null,
+      "lon": null,
+      "danger_m3s": null,
+      "label_p98_m3s": null
+    },
+    "chennai": {
+      "source": "gauges.json",
+      "lat": 13.01,
+      "lon": 80.24,
+      "danger_m3s": 92.0,
+      "label_p98_m3s": 85.0
+    },
+    "guwahati": {
+      "source": "gauges.json",
+      "lat": 26.19,
+      "lon": 91.64,
+      "danger_m3s": 45548.2,
+      "label_p98_m3s": 45707.8
+    },
+    "patna": {
+      "source": "gauges.json",
+      "lat": 25.63,
+      "lon": 85.1,
+      "danger_m3s": 39806.1,
+      "label_p98_m3s": 40178.1
+    },
+    "kochi": {
+      "source": "gauges.json",
+      "lat": 10.11,
+      "lon": 76.3,
+      "danger_m3s": 748.0,
+      "label_p98_m3s": 704.2
+    },
+    "srinagar": {
+      "source": "gauges.json",
+      "lat": 34.12,
+      "lon": 74.7,
+      "danger_m3s": 464.0,
+      "label_p98_m3s": 452.9
+    },
+    "kolkata": {
+      "source": "gauges.json",
+      "lat": 22.57,
+      "lon": 88.29,
+      "danger_m3s": 2389.5,
+      "label_p98_m3s": 2493.6
+    },
+    "bhubaneswar": {
+      "source": "gauges.json",
+      "lat": 20.43,
+      "lon": 85.98,
+      "danger_m3s": 13519.7,
+      "label_p98_m3s": 13252.2
+    },
+    "surat": {
+      "source": "gauges.json",
+      "lat": 21.15,
+      "lon": 72.77,
+      "danger_m3s": 3709.9,
+      "label_p98_m3s": 3305.1
+    },
+    "hyderabad": {
+      "source": "gauges.json",
+      "lat": 17.37,
+      "lon": 78.53,
+      "danger_m3s": 112.0,
+      "label_p98_m3s": 92.1
+    },
+    "pune": {
+      "source": "gauges.json",
+      "lat": 18.53,
+      "lon": 73.92,
+      "danger_m3s": 648.3,
+      "label_p98_m3s": 609.9
+    },
+    "dibrugarh": {
+      "source": "gauges.json",
+      "lat": 27.5,
+      "lon": 94.82,
+      "danger_m3s": 24265.1,
+      "label_p98_m3s": 24042.6
+    }
+  }
+}
