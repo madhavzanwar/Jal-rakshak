@@ -10,7 +10,7 @@ export function RunProvider({ children }: { children: ReactNode }) {
   const [starting, setStarting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const stepMs = client.mode === 'demo' ? 420 : 140;
+  const stepMs = client.mode === 'demo' ? 320 : 140;
 
   const stop = () => {
     if (timer.current) clearInterval(timer.current);

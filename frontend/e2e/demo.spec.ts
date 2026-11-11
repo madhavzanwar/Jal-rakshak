@@ -83,8 +83,10 @@ test.describe('demo replay — operator flow', () => {
 
     await page.getByTestId('citizen-place').fill('Anil Nagar');
     await page.getByTestId('citizen-check').click();
-    const choice = page.getByRole('button', { name: /Anil Nagar/ }).filter({ hasNotText: 'Try' });
-    if (await page.getByText('Which place did you mean?').isVisible().catch(() => false)) await choice.first().click();
+    const card = page.getByTestId('citizen-risk-card');
+    const chooser = page.getByRole('heading', { name: 'Which place did you mean?' });
+    await expect(card.or(chooser)).toBeVisible();
+    if (await chooser.isVisible()) await page.getByRole('button', { name: /Anil Nagar/ }).filter({ hasText: ',' }).first().click();
     await expect(page.getByTestId('citizen-risk-card')).toBeVisible();
     await expect(page.getByTestId('directions-link')).toHaveAttribute('href', /openstreetmap\.org\/directions/);
 

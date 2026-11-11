@@ -76,15 +76,8 @@ export default defineConfig(({ mode }) => {
     build: {
       target: 'es2020',
       chunkSizeWarningLimit: 900,
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules/leaflet') || id.includes('node_modules/react-leaflet') || id.includes('@react-leaflet')) return 'leaflet';
-            if (id.includes('node_modules/recharts') || id.includes('node_modules/d3-') || id.includes('node_modules/victory-vendor')) return 'charts';
-            return undefined;
-          },
-        },
-      },
+      // No manualChunks: route-level React.lazy boundaries keep Leaflet, Recharts and jsPDF
+      // out of the entry and citizen chunks (verified by the e2e bundle test).
     },
     test: {
       environment: 'jsdom',
