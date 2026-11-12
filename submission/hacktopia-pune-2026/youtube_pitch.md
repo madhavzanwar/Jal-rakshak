@@ -28,16 +28,16 @@ Recharts, LightGBM, Piper TTS.
 Chapters
 0:00 Title card
 0:14 The problem
-0:26 Command centre
-0:42 Guwahati
-1:01 Ward drill-down
-1:10 The flood builds
-1:17 Agents at work
-1:45 Human approval
-1:59 Situation report
-2:05 Citizen view
-2:18 How it's built
-2:29 Close
+0:27 Command centre
+0:45 Guwahati
+1:07 Ward drill-down
+1:17 The flood builds
+1:25 Agents at work
+1:54 Human approval
+2:08 Situation report
+2:17 Citizen view
+2:29 How it's built
+2:45 Close
 
 ## Tags
 JalRakshak, flood early warning, flood forecasting, disaster management, agentic AI, AI agents, Ollama, Qwen2.5,
@@ -47,16 +47,16 @@ Tamil, Bengali, FastAPI, React, PWA, hackathon, Hacktopia Pune 2026, PCCoE
 ## Chapters (paste into the description; YouTube needs the first at 0:00)
 0:00 Title card
 0:14 The problem
-0:26 Command centre
-0:42 Guwahati
-1:01 Ward drill-down
-1:10 The flood builds
-1:17 Agents at work
-1:45 Human approval
-1:59 Situation report
-2:05 Citizen view
-2:18 How it's built
-2:29 Close
+0:27 Command centre
+0:45 Guwahati
+1:07 Ward drill-down
+1:17 The flood builds
+1:25 Agents at work
+1:54 Human approval
+2:08 Situation report
+2:17 Citizen view
+2:29 How it's built
+2:45 Close
 
 Chapter starts follow the scenes in `docs/DEMO_SCRIPT.md`. They are computed from the final video's scene
 timings when available, otherwise from the video duration (or narration length) proportional to each scene's
