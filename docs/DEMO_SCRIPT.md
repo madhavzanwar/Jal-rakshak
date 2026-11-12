@@ -23,11 +23,11 @@ Target: ~400 words of narration ≈ 2 min 45 s.
 **Narration:** Let's open Guwahati. The score combines heavy-rain categories from the India Meteorological Department, the forecast Brahmaputra discharge against danger thresholds derived from forty years of river data, soil wetness from recent rain, and ward vulnerability. Every factor is shown, so an officer can see exactly why.
 
 ## Scene 5 — Ward drill-down
-**Visual:** Click a red ward zone; side panel with factor bars and nearest shelters.
-**Narration:** We drill down to ward level. Low-lying wards near the river turn red first, with the nearest shelters and hospitals already mapped.
+**Visual:** Click the highest-risk ward zone (Anil Nagar); side panel with factor bars and nearest shelters.
+**Narration:** We drill down to ward level. Every ward has its own score, and low-lying, vulnerable wards climb first, with the nearest shelters and hospitals already mapped.
 
 ## Scene 6 — The flood builds
-**Visual:** Replay advances; markers and wards shift from yellow to orange to red.
+**Visual:** Replay slider advances; wards and the city gauge shift from orange to red.
 **Narration:** As the replay moves forward, rain intensifies and the river crosses its danger mark. The risk turns red.
 
 ## Scene 7 — Agents at work
@@ -39,11 +39,11 @@ Target: ~400 words of narration ≈ 2 min 45 s.
 **Narration:** Nothing goes out without a human. The officer reviews the alert in English, Hindi, Marathi, Tamil and Bengali, edits if needed, and approves. Only then is it dispatched, and that decision is logged too.
 
 ## Scene 9 — Situation report
-**Visual:** Situation report panel; Export PDF.
-**Narration:** The district officer gets a one-click situation report as a PDF, ready for the control room.
+**Visual:** Scroll to the situation report panel; click Export PDF.
+**Narration:** The agents also write a situation report. The district officer exports it as a PDF in one click, ready for the control room.
 
 ## Scene 10 — Citizen view
-**Visual:** Phone-sized citizen page; search "Beltola"; personal risk, what to do now, nearest shelter, emergency numbers.
+**Visual:** Phone-sized citizen page; search "Pandu"; personal risk, what to do now, nearest shelter, emergency numbers.
 **Narration:** Citizens get a light page that works on low-end phones and offline. Enter a place to see your risk, what to do now, your nearest shelter, and emergency numbers like one-one-two.
 
 ## Scene 11 — How it's built
