@@ -273,7 +273,7 @@ def header(slide, spec, ctx: Ctx):
     kicker = spec.get("kicker")
     if kicker:
         text(slide, MX, 0.42, 9, 0.3, kicker.upper(), size=12, color=TEAL, bold=True, name="Kicker")
-    text(slide, MX, 0.7, SW - 2 * MX - (2.6 if spec.get("tag") else 0), 0.7, spec["title"], size=30, bold=True,
+    text(slide, MX, 0.7, SW - 2 * MX, 0.7, spec["title"], size=30, bold=True,
          color=INK, name="Title")
     tags = spec.get("tag")
     if tags:
@@ -394,7 +394,7 @@ def _card(slide, x, y, w, h, c, size_head=17, size_body=13):
                  fill=c.get("label_color", NAVY), size=10, h=0.28)
         cy += 0.72
     hs = c.get("head_size", size_head)
-    per_line = (w - 2 * pad) * 72 / (hs * 0.6)
+    per_line = (w - 2 * pad) * 72 / (hs * 0.55)
     lines = c.get("head_lines") or (1 if len(c["head"]) <= per_line else 2)
     text(slide, x + pad, cy, w - 2 * pad, 0.3 * lines + 0.12, c["head"], size=hs, bold=True, line_spacing=1.05)
     cy += hs / 72 * 1.3 * lines + 0.14

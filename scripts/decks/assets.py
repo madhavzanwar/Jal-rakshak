@@ -123,8 +123,10 @@ CROPS = {
     "admin": (496 / 1920, 125 / 1080, 1820 / 1920, 915 / 1080),
     # right-hand column of the agent page: monitor decision, drafted alert (guards passed), evacuation routes
     "agents-side": (1356 / 1920, 172 / 1080, 1824 / 1920, 1040 / 1080),
+    # left-hand column of the agent page: pipeline status, tool calls, guard and decision steps
+    "agents-timeline": (100 / 1920, 172 / 1080, 1345 / 1920, 1040 / 1080),
 }
-CROP_SOURCE = {"agents-side": "agents"}
+CROP_SOURCE = {"agents-side": "agents", "agents-timeline": "agents"}
 
 
 def screen(name: str, crop: bool = True) -> tuple[Path, bool]:

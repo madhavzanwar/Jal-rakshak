@@ -150,7 +150,7 @@ affected. Forecasts already exist; what is missing is the last mile: turning rai
 ward-level, local-language instructions that a district officer can trust and a citizen can act on in time.
 
 JalRakshak is an agentic early-warning and response platform built only on free, open data and open-source
-software. Every three hours it pulls Open-Meteo rainfall forecasts and GloFAS river-discharge forecasts for 12
+software. It pulls Open-Meteo rainfall forecasts and GloFAS river-discharge forecasts for 12
 flood-prone cities: Mumbai, Chennai, Guwahati, Patna, Kochi, Srinagar, Kolkata, Bhubaneswar, Surat, Hyderabad,
 Pune and Dibrugarh. A deterministic risk engine combines India Meteorological Department heavy-rain categories,
 GloFAS percentile danger thresholds, the past week's rain and ward vulnerability into a transparent 0–100 score

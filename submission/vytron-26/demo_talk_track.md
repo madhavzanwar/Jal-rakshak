@@ -4,7 +4,7 @@
 **Setup (10 minutes before the call):**
 
 - Tab 1: live demo, https://madhavzanwar.github.io/Jal-rakshak/ (demo replay mode; needs no backend).
-- Tab 2 (optional): local full stack with `docker compose up` → http://localhost:8080, to show the real Ollama
+- Tab 2 (optional): local full stack with `docker compose up` → http://localhost:8000, to show the real Ollama
   agents. If Ollama is slow on the call, stay on Tab 1, because the replay shows the same flow.
 - Tab 3: `docs/img/architecture.png`.
 - Fallback: `submission/JalRakshak_demo.mp4` open in a player, in case screen share or network fails.

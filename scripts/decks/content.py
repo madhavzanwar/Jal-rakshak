@@ -187,7 +187,7 @@ def demo(tag=None, title_="See it working", with_agents=False):
 def demo_agents(tag=None, title_="From red ward to drafted response"):
     return {"layout": "gallery", "kicker": "Live demo · city risk → agent run", "title": title_, "tag": tag,
             "images": [{"image": "dashboard-guwahati", "caption": "City risk", "sub": "gauge, factors, 72 h horizon"},
-                       {"image": "agents", "caption": "Agent timeline", "sub": "tool calls, guards, drafted alert"}],
+                       {"image": "agents-timeline", "caption": "Agent timeline", "sub": "tool calls, guard, decision"}],
             "sources": "Agent run recorded with Ollama qwen2.5:3b on the synthetic Guwahati scenario.",
             "notes": "Click 'Run response agents' on the city panel; the timeline streams each step."}
 
@@ -268,7 +268,7 @@ def tech_stack(tag=None, title_="Tech stack: open source end to end"):
              "Fast on low-end phones, offline"],
             ["Reports + media", "ReportLab SitRep PDF, Piper TTS + Playwright demo video, python-pptx decks",
              "Reproducible, scripted"],
-            ["Deploy", "docker compose (API + web + Ollama); static demo on GitHub Pages", "Runs on one laptop"],
+            ["Deploy", "docker compose (app + Ollama, port 8000); static demo on GitHub Pages", "Runs on one laptop"],
         ],
         "notes": "Everything is open source; credits in CREDITS.md (inspired by FloodGuard and PredictAid).",
     }
@@ -286,7 +286,7 @@ def impact(tag=None, title_="Expected impact"):
             "notes": "Separate what is sourced (30%, 64%) from our own estimates (orange tiles)."}
 
 
-def methodology(tag=None, title_="How it works, every 3 hours"):
+def methodology(tag=None, title_="How it works: forecast to approved action"):
     return {
         "layout": "split", "kicker": "Methodology", "title": title_, "tag": tag, "image": "dashboard-guwahati",
         "text_w": 4.9, "size": 14,
@@ -302,7 +302,7 @@ def methodology(tag=None, title_="How it works, every 3 hours"):
             {"icon": "smartphone", "head": "5  Reach citizens",
              "body": "SMS / WhatsApp (simulated) + an offline citizen page with the nearest shelter."},
         ],
-        "caption": "Guwahati in the demo replay: 72 h risk horizon, rainfall and Brahmaputra gauge.",
+        "caption": "Guwahati in the demo replay: ward zones, shelters, risk gauge and 72 h horizon.",
     }
 
 
@@ -310,13 +310,13 @@ def who(tag=None, title_="Who it's for"):
     return {
         "layout": "cards", "kicker": "Users", "title": title_, "tag": tag, "cols": 4, "body_size": 13,
         "cards": [
-            {"icon": "user-check", "head": "District officers (DDMA)", "color": "0B1F3A",
+            {"icon": "user-check", "head": "District officers (DDMA)", "head_lines": 2, "color": "0B1F3A",
              "body": ["See which wards turn red, and why", "Approve alerts in 5 languages", "One-click SitRep PDF"]},
-            {"icon": "smartphone", "head": "Citizens in flood-prone wards", "color": TEAL_HEX(),
+            {"icon": "smartphone", "head": "Citizens in flood-prone wards", "head_lines": 2, "color": TEAL_HEX(),
              "body": ["Personal risk + what to do now", "Nearest shelter and route", "Works on low-end, offline phones"]},
-            {"icon": "siren", "head": "Responders + NGOs", "color": "D64545",
+            {"icon": "siren", "head": "Responders + NGOs", "head_lines": 2, "color": "D64545",
              "body": ["Shelters and hospitals near hotspots", "Shared situation picture", "Agent log for handovers"]},
-            {"icon": "globe", "head": "SDMAs and smaller cities", "color": "5B4DB7",
+            {"icon": "globe", "head": "SDMAs and smaller cities", "head_lines": 2, "color": "5B4DB7",
              "body": ["No licence or API cost", "Runs on a laptop or one server", "Add a city by configuration"]},
         ],
         "callout": "Primary user: the district officer who must decide fast. Everyone else benefits from that decision.",

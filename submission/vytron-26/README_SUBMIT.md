@@ -11,7 +11,7 @@ All files are in `submission/vytron-26/`. Regenerate everything with `scripts/de
 | `JalRakshak_VYTRON26_Round1.pptx` | Pitch deck, 13 slides, 16:9 |
 | `_render/JalRakshak_VYTRON26_Round1.pdf` | PDF export of the deck (generated locally by build_all.sh, gitignored; upload this where a PDF is required) |
 | `abstract.md` / `abstract.pdf` | One-page abstract |
-| `abstract_round2.md` | Round 2 abstract, 424 words (prose only) |
+| `abstract_round2.md` | Round 2 abstract, 421 words (prose only) |
 | `demo_talk_track.md` | Round 3: timed 5-minute online demo script + judge Q&A prep |
 
 ## Round 1 — PPT (Unstop)
@@ -26,7 +26,7 @@ All files are in `submission/vytron-26/`. Regenerate everything with `scripts/de
 
 | Unstop field | What to enter / upload |
 |---|---|
-| Abstract (300–500 words) | Paste the body of `abstract_round2.md` — **word count: 424 words** (prose, excluding the title and link lines) |
+| Abstract (300–500 words) | Paste the body of `abstract_round2.md` — **word count: 421 words** (prose, excluding the title and link lines) |
 | GitHub link | https://github.com/madhavzanwar/Jal-rakshak |
 | Demo link (if a field exists) | https://madhavzanwar.github.io/Jal-rakshak/ |
 
