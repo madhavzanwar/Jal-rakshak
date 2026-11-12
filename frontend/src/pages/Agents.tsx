@@ -58,12 +58,12 @@ function asGuardList(v: unknown): GuardResult[] | null {
   return arr as GuardResult[];
 }
 
-function Json({ label, value }: { label: string; value: unknown }) {
+function Json({ label, value, compact = false }: { label: string; value: unknown; compact?: boolean }) {
   const [open, setOpen] = useState(false);
   if (value === null || value === undefined) return null;
   const text = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
   return (
-    <div className="mt-2">
+    <div className={compact ? (open ? 'mt-1 basis-full' : 'mt-1') : 'mt-2'}>
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-slate-200">
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? '' : '-rotate-90'}`} aria-hidden />
         {label}
@@ -78,22 +78,39 @@ function StepCard({ step, live }: { step: AgentStep; live: boolean }) {
   const k = KIND[step.kind];
   const Icon = k.icon;
   const guards = step.kind === 'guard' ? asGuardList(step.output) : null;
+  // Tool plumbing renders as a compact one-line row; reasoning, decisions and guards get full cards.
+  const compact = (step.kind === 'tool_call' || step.kind === 'tool_result') && step.content.length <= 110;
+  const meta = (
+    <span className="ml-auto flex shrink-0 items-center gap-2 font-mono text-[11px] text-slate-500">
+      <span>#{step.seq}</span>
+      <span>{fmtMs(step.duration_ms)}</span>
+      <span className="hidden sm:inline">{fmtTime(step.ts, { date: false })}</span>
+    </span>
+  );
   return (
     <li className="relative pl-9" data-testid="agent-step" data-agent={step.agent} data-kind={step.kind}>
-      <span className={`absolute left-0 top-0.5 grid h-7 w-7 place-items-center rounded-lg ${k.cls}`} aria-hidden>
+      <span className={`absolute left-0 grid h-7 w-7 place-items-center rounded-lg ${compact ? 'top-0' : 'top-0.5'} ${k.cls}`} aria-hidden>
         <Icon className="h-3.5 w-3.5" />
       </span>
-      <div className={`rounded-lg border bg-ink-900/70 px-3 py-2.5 ${live ? 'border-sky-400/50 shadow-[0_0_0_3px_rgba(56,189,248,0.12)]' : 'border-white/[0.06]'}`}>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px]">
-          <span className={`rounded px-1.5 py-0.5 font-semibold ${k.cls}`}>{k.label}</span>
-          {step.tool && <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-slate-300">{step.tool}</code>}
-          <span className="ml-auto flex items-center gap-2 font-mono text-slate-500">
-            <span>#{step.seq}</span>
-            <span>{fmtMs(step.duration_ms)}</span>
-            <span>{fmtTime(step.ts, { date: false })}</span>
-          </span>
-        </div>
-        <p className="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-200">{step.content}</p>
+      <div className={`rounded-lg border bg-ink-900/70 ${compact ? 'px-3 py-1.5' : 'px-3 py-2.5'} ${live ? 'border-sky-400/50 shadow-[0_0_0_3px_rgba(56,189,248,0.12)]' : 'border-white/[0.06]'}`}>
+        {compact ? (
+          <div className="flex min-w-0 items-center gap-2 text-[11px]">
+            <span className={`shrink-0 rounded px-1.5 py-0.5 font-semibold ${k.cls}`}>{k.label}</span>
+            <span className="min-w-0 flex-1 truncate text-[13px] text-slate-300" title={step.content}>
+              {step.content}
+            </span>
+            {meta}
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px]">
+              <span className={`rounded px-1.5 py-0.5 font-semibold ${k.cls}`}>{k.label}</span>
+              {step.tool && <code className="rounded bg-white/5 px-1.5 py-0.5 font-mono text-slate-300">{step.tool}</code>}
+              {meta}
+            </div>
+            <p className="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-200">{step.content}</p>
+          </>
+        )}
         {guards && (
           <ul className="mt-2 grid gap-1 sm:grid-cols-2">
             {guards.map((g) => (
@@ -106,8 +123,10 @@ function StepCard({ step, live }: { step: AgentStep; live: boolean }) {
             ))}
           </ul>
         )}
-        <Json label={step.kind === 'tool_call' ? 'Tool input' : 'Input'} value={step.input} />
-        {!guards && <Json label={step.kind === 'tool_call' ? 'Tool output' : 'Output'} value={step.output} />}
+        <div className={compact ? 'flex flex-wrap gap-x-4' : ''}>
+          <Json label={step.kind === 'tool_call' ? 'Tool input' : 'Input'} value={step.input} compact={compact} />
+          {!guards && <Json label={step.kind === 'tool_call' ? 'Tool output' : 'Output'} value={step.output} compact={compact} />}
+        </div>
       </div>
     </li>
   );
@@ -269,7 +288,7 @@ function RunView({ run, revealed, streaming, note, onSkip }: { run: AgentRun; re
                 </span>
               </header>
               {list.length ? (
-                <ol className="space-y-2 p-3">
+                <ol className="space-y-1.5 p-3">
                   {list.map((s) => (
                     <StepCard key={s.id} step={s} live={streaming && s.id === lastShown?.id} />
                   ))}

@@ -17,6 +17,7 @@ const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, 
 const page = await ctx.newPage();
 const settle = (ms = 1800) => page.waitForTimeout(ms);
 const shot = async (name) => {
+  await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
   await page.screenshot({ path: join(out, name) });
   console.log('wrote', name);
 };
