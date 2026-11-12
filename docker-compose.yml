@@ -1,0 +1,44 @@
+# docker compose up  →  http://localhost:8000  (app + local LLM, no API keys)
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  # One-shot: downloads the small open model (≈1.9 GB) on first run, then exits.
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["ollama", "pull", "${JR_LLM_MODEL:-qwen2.5:3b}"]
+    restart: "no"
+
+  app:
+    build: .
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      JR_LLM_PROVIDER: ${JR_LLM_PROVIDER:-auto}
+      JR_LLM_MODEL: ${JR_LLM_MODEL:-qwen2.5:3b}
+      JR_MONITOR_INTERVAL_MIN: ${JR_MONITOR_INTERVAL_MIN:-0}
+      # Optional cloud LLMs (leave unset to stay fully local):
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      - appdata:/app/backend/var
+
+volumes:
+  ollama:
+  appdata:
