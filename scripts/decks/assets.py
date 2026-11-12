@@ -114,12 +114,34 @@ def placeholder(name: str, w: int = 1600, h: int = 1000) -> Path:
     return p
 
 
-def screen(name: str) -> tuple[Path, bool]:
-    """Return (path, is_real)."""
-    p = SCREENS / f"{name}.png"
-    if p.exists():
+# Default crops for slide use (fractions of width/height: left, top, right, bottom). They drop the app chrome
+# (nav + replay bar) and the city list so the interesting part is legible at slide size.
+CROPS = {
+    "dashboard-guwahati": (300 / 1920, 105 / 1080, 1.0, 1040 / 1080),
+    "ward-drilldown": (560 / 1920, 105 / 1080, 1.0, 1040 / 1080),
+    "agents": (100 / 1920, 120 / 1080, 1820 / 1920, 1040 / 1080),
+    "admin": (496 / 1920, 125 / 1080, 1820 / 1920, 915 / 1080),
+    # right-hand column of the agent page: monitor decision, drafted alert (guards passed), evacuation routes
+    "agents-side": (1356 / 1920, 172 / 1080, 1824 / 1920, 1040 / 1080),
+}
+CROP_SOURCE = {"agents-side": "agents"}
+
+
+def screen(name: str, crop: bool = True) -> tuple[Path, bool]:
+    """Return (path, is_real). Applies the default crop for landscape app screenshots."""
+    p = SCREENS / f"{CROP_SOURCE.get(name, name)}.png"
+    if not p.exists():
+        return placeholder(name), False
+    if not crop or name not in CROPS:
         return p, True
-    return placeholder(name), False
+    out = CACHE / "crops" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if not out.exists() or out.stat().st_mtime < p.stat().st_mtime:
+        with Image.open(p) as im:
+            w, h = im.size
+            l, t, r, b = CROPS[name]
+            im.crop((round(l * w), round(t * h), round(r * w), round(b * h))).save(out)
+    return out, True
 
 
 def missing_screens() -> list[str]:

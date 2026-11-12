@@ -321,7 +321,7 @@ place instead.
 | Project / idea title | JalRakshak: agentic flood early warning and response for India |
 | Problem statement | Slide 2 text, or the "Problem" paragraph of `abstract.md` |
 | Solution description | Short description below + "Solution" and "Agentic layer" paragraphs of `abstract.md` |
-| Presentation | `{deck_name}` (or `_render/{pdf}` if PDF only). Sections: problem (2), solution (3), methodology (4–6), demo (7–8), architecture (9), expected impact (10), tech stack (11), team (12) |
+| Presentation | `{deck_name}` (or `_render/{pdf}` if PDF only). Sections: problem (2), solution (3), methodology (4–6), demo screenshots (7–9), architecture (10), expected impact (11), tech stack (12), team (13) |
 | Abstract (if asked) | `abstract.pdf` |
 | GitHub link | {C.GITHUB} |
 | Prototype / demo link | {C.DEMO_URL} |

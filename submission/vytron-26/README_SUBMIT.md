@@ -8,7 +8,7 @@ All files are in `submission/vytron-26/`. Regenerate everything with `scripts/de
 
 | File | What it is |
 |---|---|
-| `JalRakshak_VYTRON26_Round1.pptx` | Pitch deck, 12 slides, 16:9 |
+| `JalRakshak_VYTRON26_Round1.pptx` | Pitch deck, 13 slides, 16:9 |
 | `_render/JalRakshak_VYTRON26_Round1.pdf` | PDF export of the deck (generated locally by build_all.sh, gitignored; upload this where a PDF is required) |
 | `abstract.md` / `abstract.pdf` | One-page abstract |
 | `abstract_round2.md` | Round 2 abstract, 424 words (prose only) |

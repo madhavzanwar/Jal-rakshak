@@ -306,7 +306,7 @@ def s_title(slide, spec, ctx):
     text(slide, x, 4.05, 6.1, 1.2, spec.get("tagline", ""), size=15, color=ICE, line_spacing=1.2)
     text(slide, x, 5.55, 6.3, 0.35, "Madhav Zanwar  ·  Divyani Papalkar", size=16, color=WHITE, bold=True)
     text(slide, x, 5.92, 6.3, 0.3, "Pimpri Chinchwad College of Engineering (PCCoE), Pune", size=13, color=ICE)
-    p, _ = assets.screen(spec.get("image", "dashboard"))
+    p, _ = assets.screen(spec.get("image", "dashboard"), crop=False)
     picture(slide, p, 7.45, 1.45, 5.3, 4.6, mode="contain", radius=0.12, valign="middle")
     footer(slide, ctx, dark=True)
 
@@ -493,23 +493,30 @@ def s_split(slide, spec, ctx):
 
 
 def s_gallery(slide, spec, ctx):
+    """Row of screenshots fitted to a common height and centred; captions underneath."""
     bg(slide)
     header(slide, spec, ctx)
     items = spec["images"]
     top = CONTENT_TOP
-    h = CONTENT_BOTTOM - top - 0.45
-    # width weights: phone screenshots are narrow
-    weights = [0.42 if it["image"] == "citizen-mobile" else 1.0 for it in items]
-    gap = 0.3
-    avail = SW - 2 * MX - gap * (len(items) - 1)
-    x = MX
-    for it, wt in zip(items, weights):
-        w = avail * wt / sum(weights)
+    gap = 0.35
+    avail_w = SW - 2 * MX - gap * (len(items) - 1)
+    max_h = CONTENT_BOTTOM - top - 0.45
+    paths, ratios = [], []
+    for it in items:
         p, _ = assets.screen(it["image"])
-        _, (px, py, pw, ph) = picture(slide, p, x, top, w, h, mode=it.get("mode", "contain"), valign="top")
-        text(slide, x, py + ph + 0.1, w, 0.32, [[(it["caption"], {"bold": True, "color": INK})]] if not it.get("sub") or w < 3.2
-             else [[(it["caption"] + "  ", {"bold": True, "color": INK}), (it["sub"], {"color": MUTED})]],
-             size=12, align="center")
+        with Image.open(p) as im:
+            ratios.append(im.size[0] / im.size[1])
+        paths.append(p)
+    h = min(max_h, avail_w / sum(ratios))
+    total = h * sum(ratios) + gap * (len(items) - 1)
+    x = (SW - total) / 2
+    for it, p, r in zip(items, paths, ratios):
+        w = h * r
+        picture(slide, p, x, top, w, h, mode="contain", valign="top")
+        cap = [[(it["caption"], {"bold": True, "color": INK})]]
+        if it.get("sub") and w >= 3.2:
+            cap = [[(it["caption"] + "  ", {"bold": True, "color": INK}), (it["sub"], {"color": MUTED})]]
+        text(slide, x - 0.2, top + h + 0.12, w + 0.4, 0.32, cap, size=12, align="center")
         x += w + gap
     sources_line(slide, spec)
     footer(slide, ctx)
@@ -590,6 +597,13 @@ def s_alerts(slide, spec, ctx):
     _, (px, py, pw, ph) = picture(slide, p, ix, top, SW - MX - ix, CONTENT_BOTTOM - top - 0.4, valign="top")
     if spec.get("caption"):
         text(slide, px, py + ph + 0.08, pw, 0.3, spec["caption"], size=11, color=MUTED, italic=True, align="center")
+    if spec.get("guards"):
+        gy = py + ph + 0.45
+        box(slide, px, gy, pw, CONTENT_BOTTOM - gy, fill=TEAL_L, radius=0.12)
+        icon_badge(slide, "shield-check", px + 0.2, gy + (CONTENT_BOTTOM - gy - 0.5) / 2, d=0.5, fill=TEAL)
+        text(slide, px + 0.85, gy + 0.1, pw - 1.05, 0.3, spec["guards"]["head"], size=14, bold=True)
+        text(slide, px + 0.85, gy + 0.42, pw - 1.05, CONTENT_BOTTOM - gy - 0.5, spec["guards"]["body"], size=11,
+             color=MUTED, line_spacing=1.08)
     sources_line(slide, spec)
     footer(slide, ctx)
 

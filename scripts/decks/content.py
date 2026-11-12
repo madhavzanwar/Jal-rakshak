@@ -153,7 +153,7 @@ SAMPLES = [
                                "तुरंत ऊँचे स्थान या शिविर में जाएँ। आपात नंबर 112"},
     {"lang": "मराठी", "text": "पूर लाल इशारा: गुवाहाटी. ब्रह्मपुत्रा नदी धोक्याच्या पातळीवर. त्वरित उंच ठिकाणी "
                              "किंवा निवारा केंद्रात जा. आपत्कालीन क्रमांक 112"},
-    {"lang": "தமிழ்", "text": "வெள்ள சிவப்பு எச்சரிக்கை: குவாஹாட்டி (Pandu). பிரம்மபுத்திரா அபாய அளவை "
+    {"lang": "தமிழ்", "size": 11, "text": "வெள்ள சிவப்பு எச்சரிக்கை: குவாஹாட்டி (Pandu). பிரம்மபுத்திரா அபாய அளவை "
                              "தாண்டியது. உடனே மேடான இடத்துக்கு செல்லவும். அவசர உதவி 112"},
     {"lang": "বাংলা", "text": "বন্যা লাল সতর্কতা: গুয়াহাটি (Pandu, Maligaon)। ব্রহ্মপুত্র বিপদসীমার উপরে। "
                             "এখনই উঁচু জায়গা বা ত্রাণ শিবিরে যান। জরুরি নম্বর 112"},
@@ -162,25 +162,34 @@ SAMPLES = [
 
 def alerts(tag=None, title_="Five languages, one approval click"):
     return {"layout": "alerts", "kicker": "Multilingual alerts + human approval gate", "title": title_, "tag": tag,
-            "samples": SAMPLES, "image": "admin",
+            "samples": SAMPLES, "image": "admin", "text_w": 5.7,
             "caption": "Admin view: review, edit, approve. Dispatch is simulated and logged.",
+            "guards": {"head": "7 server-side guards on every version",
+                       "body": "all_languages · sms_length · script · numbers_verified · contains_112 · "
+                               "level_consistent · no_urls"},
             "sources": "SMS rendered by our vetted templates for the synthetic Guwahati scenario (127–135 chars). "
                        "Guards check script, length, numbers and 112.",
             "notes": "Show the language tabs. Point at the guard results and the SMS counter."}
 
 
-def demo(tag=None, title_="See it working"):
+def demo(tag=None, title_="See it working", with_agents=False):
+    imgs = [{"image": "ward-drilldown", "caption": "Ward drill-down", "sub": "score, factors, shelters, river gauge"},
+            {"image": "citizen-mobile", "caption": "Citizen view", "sub": "low-end phones"}]
+    if with_agents:
+        imgs.insert(1, {"image": "agents-side", "caption": "Agent output", "sub": "decision, alert"})
     return {"layout": "gallery", "kicker": "Live demo · " + DEMO_URL, "title": title_, "tag": tag,
-            "images": [{"image": "dashboard-guwahati", "caption": "City risk", "sub": "72 h horizon, gauges"},
-                       {"image": "ward-drilldown", "caption": "Ward drill-down", "sub": "factors, shelters"},
-                       {"image": "citizen-mobile", "caption": "Citizen view", "sub": "low-end phones"}],
+            "images": imgs,
+            "sources": "Screenshots of the demo replay build (synthetic Assam-monsoon-inspired flood; synthetic wards "
+                       "and shelters).",
             "notes": "Real screenshots from the demo replay build."}
 
 
-def demo_agents(tag=None, title_="Agents at work, officer in control"):
-    return {"layout": "gallery", "kicker": "Live demo · agent timeline and approval", "title": title_, "tag": tag,
-            "images": [{"image": "agents", "caption": "Agent timeline", "sub": "reasoning, tool calls, guards"},
-                       {"image": "admin", "caption": "Admin approval", "sub": "5 languages, edit, approve"}]}
+def demo_agents(tag=None, title_="From red ward to drafted response"):
+    return {"layout": "gallery", "kicker": "Live demo · city risk → agent run", "title": title_, "tag": tag,
+            "images": [{"image": "dashboard-guwahati", "caption": "City risk", "sub": "gauge, factors, 72 h horizon"},
+                       {"image": "agents", "caption": "Agent timeline", "sub": "tool calls, guards, drafted alert"}],
+            "sources": "Agent run recorded with Ollama qwen2.5:3b on the synthetic Guwahati scenario.",
+            "notes": "Click 'Run response agents' on the city panel; the timeline streams each step."}
 
 
 def architecture(tag=None, title_="Architecture: open data in, approved action out"):
@@ -388,11 +397,11 @@ def slides_for(kit_id: str) -> list[dict]:
             solution(agentic_first=True),
             agents(title_="Agentic AI: four agents, one local open LLM"),
             alerts(),
-            demo(),
+            demo(with_agents=True),
             architecture(),
             ml(title_="Transparent score first, honest ML second"),
             impact(title_="Impact and feasibility"),
-            team(note=f"Code: {GITHUB}  ·  Live demo: {DEMO_URL}  ·  Next: pilot with one district control room"),
+            team(note=[f"Code: {GITHUB}   ·   Live demo: {DEMO_URL}", "Next: pilot with one district control room"]),
         ]
     if kit_id == "hacknova-2.0":
         return [
@@ -403,6 +412,7 @@ def slides_for(kit_id: str) -> list[dict]:
             risk_formula(),
             agents(),
             demo(),
+            demo_agents(),
             alerts(),
             architecture(),
             impact(),
@@ -417,6 +427,7 @@ def slides_for(kit_id: str) -> list[dict]:
             solution(),
             agents(),
             demo(),
+            demo_agents(),
             alerts(),
             architecture(),
             ml(),
@@ -448,7 +459,7 @@ def slides_for(kit_id: str) -> list[dict]:
             ml(title_="ML + agents: what the models do, and how well", with_agents=True),
             stack_split,
             plan(),
-            demo(),
+            demo(with_agents=True),
             impact(),
             team(),
         ]
@@ -460,7 +471,7 @@ def slides_for(kit_id: str) -> list[dict]:
             agents(tag=["Innovation", "Technical"]),
             ml(tag="Technical implementation", title_="Transparent score + honest ML backtest"),
             architecture(tag=["Technical", "Scalability"]),
-            demo(tag="User impact"),
+            demo(tag="User impact", with_agents=True),
             alerts(tag="User impact"),
             feasibility(),
             scalability(),
