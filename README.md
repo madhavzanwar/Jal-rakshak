@@ -1,5 +1,7 @@
 # 🌊 JalRakshak — agentic flood early warning for India
 
+[![CI](https://github.com/madhavzanwar/Jal-rakshak/actions/workflows/ci.yml/badge.svg)](https://github.com/madhavzanwar/Jal-rakshak/actions/workflows/ci.yml) [![Deploy demo](https://github.com/madhavzanwar/Jal-rakshak/actions/workflows/pages.yml/badge.svg)](https://github.com/madhavzanwar/Jal-rakshak/actions/workflows/pages.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 **Open forecasts → ward-level risk → multilingual alerts a human approves → people who know what to do.**
 
 JalRakshak watches 12 flood-prone Indian cities using free open data. It computes a transparent 72-hour
